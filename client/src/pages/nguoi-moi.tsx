@@ -428,7 +428,7 @@ export default function NguoiMoiPage() {
                     <p className="text-gray-600 mb-6">
                       Lộ trình này miễn phí! Bạn có thể học và tham khảo thêm ở nhóm trên Facebook hen! Nếu bạn muốn học lớp Affiliate Shopee VIP, có động đồng học viên, có sự support từ Hiếu. Chi tiết bạn bấm vào bên dưới nghen!
                     </p>
-                    <Link href="https://zalo.me/hieusuro">
+                    <Link href="/hieusuro">
                       <Button 
                         size="lg" 
                         className="bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 text-white"
