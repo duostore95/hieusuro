@@ -1,0 +1,184 @@
+{
+  "users": [],
+  "blogPosts": [
+    [
+      "dd3b536f-13ca-4924-a3e2-bfa467ac52e6",
+      {
+        "id": "dd3b536f-13ca-4924-a3e2-bfa467ac52e6",
+        "title": "7 Bước Làm chủ Shopee từ Zero",
+        "slug": "7-buoc-lam-chu-shopee-tu-zero",
+        "excerpt": "Khám phá những chiến lược hiệu quả để bán hàng thành công trên Shopee từ Zero đến Diamond Seller...",
+        "content": "Nội dung chi tiết về chiến lược bán hàng Shopee...",
+        "imageUrl": "/attached_assets/hieu-suro-profile.png",
+        "publishedAt": "2024-11-25T00:00:00.000Z",
+        "views": 99,
+        "lastDailyIncrement": "2025-09-28",
+        "status": "published"
+      }
+    ],
+    [
+      "0ee37aba-8cc0-4c29-8d79-904844e7919b",
+      {
+        "id": "0ee37aba-8cc0-4c29-8d79-904844e7919b",
+        "title": "Content Marketing: Từ Zero Đến Hero",
+        "slug": "content-marketing-tu-zero-den-hero",
+        "excerpt": "Hướng dẫn chi tiết cách tạo ra nội dung chất lượng, thu hút và chuyển đổi khách hàng hiệu quả...",
+        "content": "Nội dung chi tiết về content marketing...",
+        "imageUrl": "/attached_assets/hieu-suro-profile.png",
+        "publishedAt": "2024-11-20T00:00:00.000Z",
+        "views": 91,
+        "lastDailyIncrement": "2025-09-28",
+        "status": "published"
+      }
+    ],
+    [
+      "985f1f71-08d6-48ef-a3c3-9f9cbfc13d77",
+      {
+        "id": "985f1f71-08d6-48ef-a3c3-9f9cbfc13d77",
+        "title": "Social Media Growth Hacks 2024",
+        "slug": "social-media-growth-hacks-2024",
+        "excerpt": "Những chiến thuật tăng trưởng mạnh mẽ trên các nền tảng mạng xã hội để xây dựng community mạnh mẽ...",
+        "content": "Nội dung chi tiết về social media growth...",
+        "imageUrl": "/attached_assets/hieu-suro-profile.png",
+        "publishedAt": "2024-11-18T00:00:00.000Z",
+        "views": 104,
+        "lastDailyIncrement": "2025-09-28",
+        "status": "published"
+      }
+    ]
+  ],
+  "courses": [
+    [
+      "9e8312ac-64cf-4bfe-8fd6-93ace87c6097",
+      {
+        "id": "9e8312ac-64cf-4bfe-8fd6-93ace87c6097",
+        "title": "ShopeeZoom - Từ Zero Đến Hero",
+        "description": "Khóa học toàn diện về bán hàng Shopee từ A-Z, bao gồm tạo shop, SEO sản phẩm, chạy quảng cáo và scale doanh thu.",
+        "price": "1990000",
+        "imageUrl": "/attached_assets/hieu-suro-profile.png",
+        "duration": "8 tuần",
+        "studentCount": 150,
+        "rating": "4.9",
+        "badge": "Bestseller",
+        "status": "active",
+        "createdAt": "2025-09-27T15:42:34.834Z",
+        "courseUrl": "/shopeezoom"
+      }
+    ],
+    [
+      "182681d6-e4f5-4966-8f41-1ff76deb46ce",
+      {
+        "id": "182681d6-e4f5-4966-8f41-1ff76deb46ce",
+        "title": "Affiliate Shopee A-Z",
+        "description": "Hướng dẫn chi tiết cách kiếm tiền từ Affiliate Shopee, từ cách tạo content đến chiến lược marketing tăng thu nhập.",
+        "price": "2490000",
+        "imageUrl": "/attached_assets/hieu-suro-profile.png",
+        "duration": "10 tuần",
+        "studentCount": 89,
+        "rating": "4.8",
+        "badge": "Mới",
+        "status": "active",
+        "createdAt": "2025-09-27T15:42:34.834Z",
+        "courseUrl": "/affshopee"
+      }
+    ],
+    [
+      "31ce11dc-a04f-420a-8105-884364d13205",
+      {
+        "id": "31ce11dc-a04f-420a-8105-884364d13205",
+        "title": "TikTok Shop Mastery",
+        "description": "Khóa học chuyên sâu về bán hàng trên TikTok Shop, từ cách tạo video viral đến quản lý đơn hàng hiệu quả.",
+        "price": "1590000",
+        "imageUrl": "/attached_assets/hieu-suro-profile.png",
+        "duration": "6 tuần",
+        "studentCount": 200,
+        "rating": "4.9",
+        "badge": "Hot",
+        "status": "active",
+        "createdAt": "2025-09-27T15:42:34.834Z",
+        "courseUrl": "/tiktokzoom"
+      }
+    ]
+  ],
+  "testimonials": [
+    [
+      "6fbf3868-13ae-456d-8191-6af71d6fa96e",
+      {
+        "id": "6fbf3868-13ae-456d-8191-6af71d6fa96e",
+        "name": "Nguyễn Minh Anh",
+        "title": "Content Creator",
+        "company": "50K followers",
+        "content": "Khóa học ShopeeZoom của anh Hiếu đã thay đổi hoàn toàn cách tôi bán hàng online. Chỉ sau 2 tháng, shop tôi đã từ 0 lên 500+ đơn/tháng và doanh thu hơn 50 triệu.",
+        "rating": 5,
+        "avatarUrl": "/attached_assets/hieu-suro-profile.png",
+        "featured": true,
+        "createdAt": "2025-09-27T15:42:34.834Z"
+      }
+    ],
+    [
+      "19c586dd-5b41-47ee-974c-f94f9edc123a",
+      {
+        "id": "19c586dd-5b41-47ee-974c-f94f9edc123a",
+        "name": "Trần Đức Thành",
+        "title": "Startup Founder",
+        "company": "Tech",
+        "content": "Mentor Hiếu rất tận tâm và có kinh nghiệm thực tiễn. Những chiến lược anh chia sẻ đều có thể áp dụng ngay và mang lại kết quả cụ thể cho business của tôi.",
+        "rating": 5,
+        "avatarUrl": "/attached_assets/hieu-suro-profile.png",
+        "featured": true,
+        "createdAt": "2025-09-27T15:42:34.834Z"
+      }
+    ],
+    [
+      "be6e9855-ca4e-4e98-bb4d-56a3b7d5ff12",
+      {
+        "id": "be6e9855-ca4e-4e98-bb4d-56a3b7d5ff12",
+        "name": "Lê Thị Hương",
+        "title": "Marketing Manager",
+        "company": "Fashion",
+        "content": "Course content rất chi tiết và dễ hiểu. Anh Hiếu luôn support nhiệt tình khi tôi có thắc mắc. Recommend 100% cho ai muốn build personal brand!",
+        "rating": 5,
+        "avatarUrl": "/attached_assets/hieu-suro-profile.png",
+        "featured": true,
+        "createdAt": "2025-09-27T15:42:34.834Z"
+      }
+    ]
+  ],
+  "leads": [],
+  "settings": [],
+  "landingPageViews": [
+    [
+      "/affshopee",
+      {
+        "id": "72f2ee8f-87bf-4546-bb61-06cd74d56795",
+        "slug": "/affshopee",
+        "title": "Affiliate Shopee A-Z",
+        "views": 1,
+        "lastDailyIncrement": null,
+        "createdAt": "2025-09-27T15:42:34.834Z"
+      }
+    ],
+    [
+      "/shopeezoom",
+      {
+        "id": "672edddc-2f93-460a-adf8-9c50d19e3dae",
+        "slug": "/shopeezoom",
+        "title": "ShopeeZoom - Từ Zero Đến Hero",
+        "views": 0,
+        "lastDailyIncrement": null,
+        "createdAt": "2025-09-27T15:42:34.834Z"
+      }
+    ],
+    [
+      "/tiktokzoom",
+      {
+        "id": "5c91c1bf-1af6-409e-8675-ed9efb07c5d8",
+        "slug": "/tiktokzoom",
+        "title": "TikTok Shop Mastery",
+        "views": 0,
+        "lastDailyIncrement": null,
+        "createdAt": "2025-09-27T15:42:34.834Z"
+      }
+    ]
+  ]
+}
