@@ -256,7 +256,7 @@ export class MemStorage implements IStorage {
         price: "1990000",
         imageUrl: "/attached_assets/hieu-suro-profile.png",
         duration: "8 tuần",
-        studentCount: 922,
+        studentCount: 150,
         rating: "4.9",
         badge: "Bestseller",
         status: "active",
