@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from '@/components/ui/collapsible';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   CheckCircle,
   Clock,
@@ -50,32 +50,37 @@ import {
   Image,
   Globe,
   Settings,
-} from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import SEO from "@/components/seo";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+} from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import SEO from '@/components/seo';
+import { useMutation } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
 
 // Import result images
-import hieuresultImg from "@assets/image_1758445937864.png";
-import studentresultImg from "@assets/image_1758445948969.png";
-import tiktokShopeeQr from "@assets/8950K_1758526741823.jpeg";
-import comboVipQr from "@assets/9990K_1758526753478.jpeg";
+// import hieuresultImg from '@assets/image_1758445937864.png';
+// import studentresultImg from '@assets/image_1758445948969.png';
+// import tiktokShopeeQr from '@assets/8950K_1758526741823.jpeg';
+// import comboVipQr from '@assets/9990K_1758526753478.jpeg';
 
+const IMG_MOCK_PATH = '/attached_assets/IMG_6900_1758442234405.JPG';
+const comboVipQr = IMG_MOCK_PATH;
+const studentresultImg = IMG_MOCK_PATH;
+const tiktokShopeeQr = IMG_MOCK_PATH;
+const hieuresultImg = IMG_MOCK_PATH;
 export default function ShopeeZoomLanding() {
   const { toast } = useToast();
 
   // Increment view count mutation for landing page
   const incrementViewMutation = useMutation({
     mutationFn: async (slug: string) => {
-      return await apiRequest("POST", `/api/landing-views${slug}/view`);
+      return await apiRequest('POST', `/api/landing-views${slug}/view`);
     },
   });
 
   // Increment view count when page loads
   useEffect(() => {
     // Count every visit for accurate analytics
-    incrementViewMutation.mutate("/shopeezoom");
+    incrementViewMutation.mutate('/shopeezoom');
   }, []);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -86,15 +91,15 @@ export default function ShopeeZoomLanding() {
 
   // State for selected pricing package
   const [selectedPackage, setSelectedPackage] = useState({
-    name: "khóa ShopeeZoom",
-    price: "3990K",
-    fullAmount: "3.990.000 VND",
-    qrCode: "/attached_assets/IMG_6900_1758442234405.JPG",
+    name: 'khóa ShopeeZoom',
+    price: '3990K',
+    fullAmount: '3.990.000 VND',
+    qrCode: '/attached_assets/IMG_6900_1758442234405.JPG',
   });
 
   // Countdown timer for course start date
   useEffect(() => {
-    const targetDate = new Date("2025-09-25T20:00:00").getTime();
+    const targetDate = new Date('2025-09-25T20:00:00').getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -104,7 +109,7 @@ export default function ShopeeZoomLanding() {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
           hours: Math.floor(
-            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
           ),
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((difference % (1000 * 60)) / 1000),
@@ -121,111 +126,114 @@ export default function ShopeeZoomLanding() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   // Data structures for new sections
   const specialGifts = [
     {
-      name: "Khóa học Shopee ADS nâng cao trị giá 2990K",
-      value: "2.990.000 VNĐ",
-      description: "Khóa học Shopee ADS nâng cao đang được học viên đăng ký với mức chi phí 2990K, nếu bạn là học viên của khóa học kỹ lớp ShopeeZoom thì sẽ được tặng miễn phí ^^",
+      name: 'Khóa học Shopee ADS nâng cao trị giá 2990K',
+      value: '2.990.000 VNĐ',
+      description:
+        'Khóa học Shopee ADS nâng cao đang được học viên đăng ký với mức chi phí 2990K, nếu bạn là học viên của khóa học kỹ lớp ShopeeZoom thì sẽ được tặng miễn phí ^^',
       icon: <BarChart3 className="h-8 w-8" />,
     },
     {
-      name: "Khóa học thiết kế trị giá 1500K",
-      value: "1.500.000 VNĐ",
-      description: "Hiếu có quay sẵn 2 khóa học thiết kế trên canva, 2 khóa học này đang bán 1500K (khoảng 120 phút dạy kỹ hơc). Và Hiếu sẽ tặng kèm cho bạn khi đăng ký khóa học ShopeeZoom này.",
+      name: 'Khóa học thiết kế trị giá 1500K',
+      value: '1.500.000 VNĐ',
+      description:
+        'Hiếu có quay sẵn 2 khóa học thiết kế trên canva, 2 khóa học này đang bán 1500K (khoảng 120 phút dạy kỹ hơc). Và Hiếu sẽ tặng kèm cho bạn khi đăng ký khóa học ShopeeZoom này.',
       icon: <Image className="h-8 w-8" />,
     },
     {
-      name: "File thiết kế gian hàng trị giá 1900K",
-      value: "1.900.000 VNĐ",
+      name: 'File thiết kế gian hàng trị giá 1900K',
+      value: '1.900.000 VNĐ',
       description:
-        "Thực ra con số 1900k kia Hiếu ghi hơi lỡ. Vì 1 thiết kế gian hàng trên Hiếu lấy giá cho 1 shop đã 1900K rồi. Mà quà này Hiếu tặng có tới 4 file như thế, còn tặng frame khung ảnh đại diện nữa! Nên giá có thể x4 so với 1900K.",
+        'Thực ra con số 1900k kia Hiếu ghi hơi lỡ. Vì 1 thiết kế gian hàng trên Hiếu lấy giá cho 1 shop đã 1900K rồi. Mà quà này Hiếu tặng có tới 4 file như thế, còn tặng frame khung ảnh đại diện nữa! Nên giá có thể x4 so với 1900K.',
       icon: <Store className="h-8 w-8" />,
     },
     {
-      name: "Hoàn tiền 100% nếu không hài lòng",
-      value: "3.990.000 VNĐ",
-      description: "Nếu bạn đã học đủ 7 buổi, có thực hành làm bài tập và bạn vẫn cảm thấy mình không nhận được giá trị kiến thức gì thì cứ nhắn cho Hiếu. 100% tiền học phí sẽ được hoàn lại cho bạn!",
+      name: 'Hoàn tiền 100% nếu không hài lòng',
+      value: '3.990.000 VNĐ',
+      description:
+        'Nếu bạn đã học đủ 7 buổi, có thực hành làm bài tập và bạn vẫn cảm thấy mình không nhận được giá trị kiến thức gì thì cứ nhắn cho Hiếu. 100% tiền học phí sẽ được hoàn lại cho bạn!',
       icon: <Award className="h-8 w-8" />,
     },
   ];
 
   const curriculumStages = [
     {
-      stage: "Giai đoạn 1",
-      title: "Nghiên cứu tìm sản phẩm, thị trường ngách",
-      duration: "Buổi 1 - 2",
+      stage: 'Giai đoạn 1',
+      title: 'Nghiên cứu tìm sản phẩm, thị trường ngách',
+      duration: 'Buổi 1 - 2',
       details: [
-        "Mục tiêu, tiềm năng, rủi ro, cơ hội kiếm tiền trên Shopee",
-        "Những hình thức bán trên Shopee",
-        "Những kiểu kinh doanh trên Shopee lãi cao",
-        "Tiêu chí khi chọn sản phẩm để bán Shopee",
-        "Cách bán hàng không cần vốn (vốn 0đ)",
-        "Nghiên cứu thị trường, đối thủ, sản phẩm, khách hàng",
-        "SPY đối thủ tìm kiếm nhu cầu, volume thị trường",
+        'Mục tiêu, tiềm năng, rủi ro, cơ hội kiếm tiền trên Shopee',
+        'Những hình thức bán trên Shopee',
+        'Những kiểu kinh doanh trên Shopee lãi cao',
+        'Tiêu chí khi chọn sản phẩm để bán Shopee',
+        'Cách bán hàng không cần vốn (vốn 0đ)',
+        'Nghiên cứu thị trường, đối thủ, sản phẩm, khách hàng',
+        'SPY đối thủ tìm kiếm nhu cầu, volume thị trường',
       ],
     },
     {
-      stage: "Giai đoạn 2",
-      title: "Xây dựng shop chuẩn SEO",
-      duration: "Buổi 2 - 3",
+      stage: 'Giai đoạn 2',
+      title: 'Xây dựng shop chuẩn SEO',
+      duration: 'Buổi 2 - 3',
       details: [
-        "Hướng dẫn tạo shop chuẩn SEO",
-        "Thiết lập shop cơ bản đúng quy tắc",
-        "Thiết kế shop",
-        "Đăng sản phẩm chuẩn SEO",
-        "Làm hình ảnh đẹp, cuốn hút, đúng cấu trúc",
+        'Hướng dẫn tạo shop chuẩn SEO',
+        'Thiết lập shop cơ bản đúng quy tắc',
+        'Thiết kế shop',
+        'Đăng sản phẩm chuẩn SEO',
+        'Làm hình ảnh đẹp, cuốn hút, đúng cấu trúc',
       ],
     },
     {
-      stage: "Giai đoạn 3",
-      title: "Seeding đánh giá 5 sao & lượt bán",
-      duration: "Buổi 3 - 4",
+      stage: 'Giai đoạn 3',
+      title: 'Seeding đánh giá 5 sao & lượt bán',
+      duration: 'Buổi 3 - 4',
       details: [
-        "Seeding là gì?",
-        "Tại sao seeding lại là yếu tố quyết định đến đơn hàng của shop",
-        "Hướng dẫn chi tiết 5 thủ thuật seeding",
-        "Hướng dẫn tăng lượt bán cho sản phẩm mới",
-        "ĐẶC BIỆT: tham gia nhóm kín của lớp có gần 300 bạn học viên hỗ trợ chéo đơn (shop mới muốn có 100-500 đánh giá 5* RẤT ĐƠN GIẢN!)",
+        'Seeding là gì?',
+        'Tại sao seeding lại là yếu tố quyết định đến đơn hàng của shop',
+        'Hướng dẫn chi tiết 5 thủ thuật seeding',
+        'Hướng dẫn tăng lượt bán cho sản phẩm mới',
+        'ĐẶC BIỆT: tham gia nhóm kín của lớp có gần 300 bạn học viên hỗ trợ chéo đơn (shop mới muốn có 100-500 đánh giá 5* RẤT ĐƠN GIẢN!)',
       ],
     },
     {
-      stage: "Giai đoạn 4",
-      title: "Marketing nội sàn, kéo traffic bền vững",
-      duration: "Buổi 4 - 5",
+      stage: 'Giai đoạn 4',
+      title: 'Marketing nội sàn, kéo traffic bền vững',
+      duration: 'Buổi 4 - 5',
       details: [
-        "Hướng dẫn cách làm 2 chương trình khuyến mãi siêu HOT của shopee",
-        "Hướng dẫn hơn 8 cách marketing nội sàn cho shop mới",
-        "Hướng dẫn cách đẩy đánh giá 5 sao gấp 5 lần thông thường",
-        "Hướng dẫn cài đặt TOP các sản phẩm tại shop",
-        "Các chiến lược triển khai kéo traffic nội sàn cho shop mới (và shop cũ)",
+        'Hướng dẫn cách làm 2 chương trình khuyến mãi siêu HOT của shopee',
+        'Hướng dẫn hơn 8 cách marketing nội sàn cho shop mới',
+        'Hướng dẫn cách đẩy đánh giá 5 sao gấp 5 lần thông thường',
+        'Hướng dẫn cài đặt TOP các sản phẩm tại shop',
+        'Các chiến lược triển khai kéo traffic nội sàn cho shop mới (và shop cũ)',
       ],
     },
     {
-      stage: "Giai đoạn 5",
-      title: "Quảng cáo Shopee ra đơn",
-      duration: "Buổi 5 - 6",
+      stage: 'Giai đoạn 5',
+      title: 'Quảng cáo Shopee ra đơn',
+      duration: 'Buổi 5 - 6',
       details: [
-        "Hiểu mọi thứ về thuật toán của sàn shopee",
-        "Tư duy chạy quảng cáo chắc chắn có lãi",
-        "Cách chạy quảng cáo tìm kiếm lên TOP 1",
-        "Cách chạy quảng cáo khám phá bám đuổi khách hàng",
-        "Cách chạy quảng cáo shopee giúp tăng nhận diện",
-        "Thủ thuật, mẹo vặt của Hiếu khi chạy quảng cáo trên shopee",
+        'Hiểu mọi thứ về thuật toán của sàn shopee',
+        'Tư duy chạy quảng cáo chắc chắn có lãi',
+        'Cách chạy quảng cáo tìm kiếm lên TOP 1',
+        'Cách chạy quảng cáo khám phá bám đuổi khách hàng',
+        'Cách chạy quảng cáo shopee giúp tăng nhận diện',
+        'Thủ thuật, mẹo vặt của Hiếu khi chạy quảng cáo trên shopee',
       ],
     },
     {
-      stage: "Giai đoạn 6",
-      title: "Tối ưu Shop, nhân bản shop",
-      duration: "Buổi 6 - 7",
+      stage: 'Giai đoạn 6',
+      title: 'Tối ưu Shop, nhân bản shop',
+      duration: 'Buổi 6 - 7',
       details: [
-        "Tối ưu shop giảm chi phí, nâng mức lợi nhuận",
-        "Cách nhân bản ra nhiều shop",
-        "Cách vận hành shop không bị shopee phạt",
+        'Tối ưu shop giảm chi phí, nâng mức lợi nhuận',
+        'Cách nhân bản ra nhiều shop',
+        'Cách vận hành shop không bị shopee phạt',
       ],
     },
   ];
@@ -233,147 +241,147 @@ export default function ShopeeZoomLanding() {
   const targetAudience = [
     {
       icon: <Briefcase className="h-12 w-12" />,
-      title: "Tìm thêm công việc",
+      title: 'Tìm thêm công việc',
       description:
-        "Bạn đang làm công việc chính nhưng muốn có thêm nguồn thu nhập từ bán hàng online",
+        'Bạn đang làm công việc chính nhưng muốn có thêm nguồn thu nhập từ bán hàng online',
       benefits: [
-        "Thu nhập thêm 10-30tr/tháng",
-        "Làm việc linh hoạt",
-        "Không ảnh hưởng công việc chính",
+        'Thu nhập thêm 10-30tr/tháng',
+        'Làm việc linh hoạt',
+        'Không ảnh hưởng công việc chính',
       ],
     },
     {
       icon: <Store className="h-12 w-12" />,
-      title: "Chủ shop đang bán",
+      title: 'Chủ shop đang bán',
       description:
-        "Bạn đã có shop trên Shopee nhưng doanh số thấp, muốn tăng đơn hàng và doanh thu",
+        'Bạn đã có shop trên Shopee nhưng doanh số thấp, muốn tăng đơn hàng và doanh thu',
       benefits: [
-        "Tăng doanh số x3-x5",
-        "Tối ưu chi phí quảng cáo",
-        "Nâng cao ranking shop",
+        'Tăng doanh số x3-x5',
+        'Tối ưu chi phí quảng cáo',
+        'Nâng cao ranking shop',
       ],
     },
     {
       icon: <Factory className="h-12 w-12" />,
-      title: "Chủ xưởng, t���ng kho",
+      title: 'Chủ xưởng, t���ng kho',
       description:
-        "Bạn có nguồn hàng sẵn có, muốn mở rộng kênh bán hàng trên sàn thương mại điện tử",
+        'Bạn có nguồn hàng sẵn có, muốn mở rộng kênh bán hàng trên sàn thương mại điện tử',
       benefits: [
-        "Mở rộng thị trường",
-        "Tăng lượng đơn hàng",
-        "Giảm chi phí trung gian",
+        'Mở rộng thị trường',
+        'Tăng lượng đơn hàng',
+        'Giảm chi phí trung gian',
       ],
     },
     {
       icon: <Laptop className="h-12 w-12" />,
-      title: "Đang bán kênh khác",
+      title: 'Đang bán kênh khác',
       description:
-        "Bạn đang bán trên Facebook, Instagram, TikTok và muốn mở rộng sang Shopee",
+        'Bạn đang bán trên Facebook, Instagram, TikTok và muốn mở rộng sang Shopee',
       benefits: [
-        "Đa dạng kênh bán hàng",
-        "Gia tăng độ tin cậy",
-        "Tối ưu nguồn lực",
+        'Đa dạng kênh bán hàng',
+        'Gia tăng độ tin cậy',
+        'Tối ưu nguồn lực',
       ],
     },
   ];
 
   const dailyOrders = [
     {
-      date: "15/11/2023",
+      date: '15/11/2023',
       orders: 127,
-      revenue: "38.5 triệu",
-      image: "/attached_assets/image_1758295870543.png",
-      alt: "Biểu đồ đơn hàng ngày 15/11/2023",
+      revenue: '38.5 triệu',
+      image: '/attached_assets/image_1758295870543.png',
+      alt: 'Biểu đồ đơn hàng ngày 15/11/2023',
     },
     {
-      date: "16/11/2023",
+      date: '16/11/2023',
       orders: 156,
-      revenue: "47.2 triệu",
-      image: "/attached_assets/image_1758296036738.png",
-      alt: "Biểu đồ đơn hàng ngày 16/11/2023",
+      revenue: '47.2 triệu',
+      image: '/attached_assets/image_1758296036738.png',
+      alt: 'Biểu đồ đơn hàng ngày 16/11/2023',
     },
     {
-      date: "17/11/2023",
+      date: '17/11/2023',
       orders: 189,
-      revenue: "52.8 triệu",
-      image: "/attached_assets/image_1758296052364.png",
-      alt: "Biểu đồ đơn hàng ngày 17/11/2023",
+      revenue: '52.8 triệu',
+      image: '/attached_assets/image_1758296052364.png',
+      alt: 'Biểu đồ đơn hàng ngày 17/11/2023',
     },
     {
-      date: "18/11/2023",
+      date: '18/11/2023',
       orders: 203,
-      revenue: "61.4 triệu",
-      image: "/attached_assets/image_1758296068543.png",
-      alt: "Biểu đồ đơn hàng ngày 18/11/2023",
+      revenue: '61.4 triệu',
+      image: '/attached_assets/image_1758296068543.png',
+      alt: 'Biểu đồ đơn hàng ngày 18/11/2023',
     },
   ];
 
   const detailedSkills = [
     {
-      category: "Nghiên cứu & Tìm sản phẩm",
+      category: 'Nghiên cứu & Tìm sản phẩm',
       skills: [
-        "Kỹ năng nghiên cứu mọi thứ trước khi quyết định bán hàng",
-        "Kỹ năng tìm được sản phẩm WIN, dễ bán",
-        "Tư duy về kinh doanh online trên sàn TMĐT",
-        "Kỹ năng tạo ra đơn cho shop hoàn toàn tự động",
+        'Kỹ năng nghiên cứu mọi thứ trước khi quyết định bán hàng',
+        'Kỹ năng tìm được sản phẩm WIN, dễ bán',
+        'Tư duy về kinh doanh online trên sàn TMĐT',
+        'Kỹ năng tạo ra đơn cho shop hoàn toàn tự động',
       ],
     },
     {
-      category: "SEO & Tối ưu Shop",
+      category: 'SEO & Tối ưu Shop',
       skills: [
-        "Kỹ năng SEO cho sản phẩm và Shop lên TOP 1",
-        "Hình ảnh chuẩn cấu trúc SEO trên sàn Shopee",
-        "Seeding sản phẩm để khách hàng tin tưởng",
-        "Kỹ thuật tăng x5 lần số đánh giá trong shop",
+        'Kỹ năng SEO cho sản phẩm và Shop lên TOP 1',
+        'Hình ảnh chuẩn cấu trúc SEO trên sàn Shopee',
+        'Seeding sản phẩm để khách hàng tin tưởng',
+        'Kỹ thuật tăng x5 lần số đánh giá trong shop',
       ],
     },
     {
-      category: "Marketing & Traffic",
+      category: 'Marketing & Traffic',
       skills: [
-        "Kỹ năng tự tạo các luồng traffic tự nhiên, hiệu quả",
-        "Nắm được kỹ năng marketing nội sàn",
-        "Kỹ năng booking KOC trên Tiktok, Instagram",
-        "Kỹ năng kéo traffic ngoại sàn vào shop nhờ booking, tặng quà",
+        'Kỹ năng tự tạo các luồng traffic tự nhiên, hiệu quả',
+        'Nắm được kỹ năng marketing nội sàn',
+        'Kỹ năng booking KOC trên Tiktok, Instagram',
+        'Kỹ năng kéo traffic ngoại sàn vào shop nhờ booking, tặng quà',
       ],
     },
     {
-      category: "Quảng cáo & Bán hàng",
+      category: 'Quảng cáo & Bán hàng',
       skills: [
-        "Cách chạy quảng cáo shopee chi phí thấp",
-        "Kỹ năng tiếp thị liên kết giúp x20 lần doanh thu",
-        "Xây dựng hệ thống kinh doanh vận hành 1 người",
-        "Tạo ra được nhiều shop trên Shopee có đơn nhiều",
+        'Cách chạy quảng cáo shopee chi phí thấp',
+        'Kỹ năng tiếp thị liên kết giúp x20 lần doanh thu',
+        'Xây dựng hệ thống kinh doanh vận hành 1 người',
+        'Tạo ra được nhiều shop trên Shopee có đơn nhiều',
       ],
     },
   ];
 
   const whyChooseReasons = [
     {
-      number: "01",
-      title: "Chất lượng > số lượng",
+      number: '01',
+      title: 'Chất lượng > số lượng',
       description:
         'Với mục tiêu tập trung vào chất lượng hơn là số lượng, nên mỗi khóa học Hiếu sẽ luôn giới hạn học viên lại, để đảm bảo mang được nhiều giá trị nhất đến cả lớp. Ngoài ra Hiếu cũng có thời gian để "take care" từng shop của học viên hơn.',
       icon: <Award className="h-8 w-8" />,
     },
     {
-      number: "02",
-      title: "Hiếu hỗ trợ 1-1 trọn đời",
+      number: '02',
+      title: 'Hiếu hỗ trợ 1-1 trọn đời',
       description:
-        "Khác với ngoài kia, chỉ có hỗ trợ trên nhóm chung, hỗ trợ trong nhóm facebook, ai không hiểu gì thì đăng lên hỏi. Nhưng đối với Hiếu, khoảng thời gian đầu khi kinh doanh là khó khăn nhất, cần một người bên cạnh đồng hành, hỗ trợ khi cần. Chính vì vậy, Hiếu mới nghĩ ra cách hỗ trợ 1-1 qua Zalo trọn đời, hỗ trợ cho đến khi nào bạn bán được hàng.",
+        'Khác với ngoài kia, chỉ có hỗ trợ trên nhóm chung, hỗ trợ trong nhóm facebook, ai không hiểu gì thì đăng lên hỏi. Nhưng đối với Hiếu, khoảng thời gian đầu khi kinh doanh là khó khăn nhất, cần một người bên cạnh đồng hành, hỗ trợ khi cần. Chính vì vậy, Hiếu mới nghĩ ra cách hỗ trợ 1-1 qua Zalo trọn đời, hỗ trợ cho đến khi nào bạn bán được hàng.',
       icon: <Heart className="h-8 w-8" />,
     },
     {
-      number: "03",
-      title: "Cá nhân hóa kế hoạch",
+      number: '03',
+      title: 'Cá nhân hóa kế hoạch',
       description:
-        "Chắc chắn là khi học thì bạn sẽ nhận được toàn bộ tài liệu xịn, những phần mềm bổ trợ cho việc bán hàng, Hiếu có quay màn hình lại cho từng buổi để bạn học lại. Đặc biệt, bạn sẽ nhận được một kế hoạch riêng của shop bạn. Bạn sẽ làm bài tập, gửi Hiếu, rồi Hiếu sẽ sửa bài, feedback những thứ cần tối ưu trên Shop. Mục đích vẫn là làm sao cho shop bạn phát triển.",
+        'Chắc chắn là khi học thì bạn sẽ nhận được toàn bộ tài liệu xịn, những phần mềm bổ trợ cho việc bán hàng, Hiếu có quay màn hình lại cho từng buổi để bạn học lại. Đặc biệt, bạn sẽ nhận được một kế hoạch riêng của shop bạn. Bạn sẽ làm bài tập, gửi Hiếu, rồi Hiếu sẽ sửa bài, feedback những thứ cần tối ưu trên Shop. Mục đích vẫn là làm sao cho shop bạn phát triển.',
       icon: <UserCheck className="h-8 w-8" />,
     },
     {
-      number: "04",
-      title: "Cộng đồng kinh doanh",
+      number: '04',
+      title: 'Cộng đồng kinh doanh',
       description:
-        "Trong quá trình học, thì bạn cũng sẽ được tham gia vào cộng đồng những người kinh doanh online, nơi mọi người sẽ giao lưu, chia sẻ. Cũng là nơi để cả lớp trao đổi buôn bán với nhau, trong cộng đồng cũng sẽ có nhiều chủ xưởng, nhiều tổng kho muốn bán sỉ, cũng sẽ có nhiều học viên chưa có nguồn hàng. Thì 2 bên có thể kết nối, rồi hợp tác với nhau.",
+        'Trong quá trình học, thì bạn cũng sẽ được tham gia vào cộng đồng những người kinh doanh online, nơi mọi người sẽ giao lưu, chia sẻ. Cũng là nơi để cả lớp trao đổi buôn bán với nhau, trong cộng đồng cũng sẽ có nhiều chủ xưởng, nhiều tổng kho muốn bán sỉ, cũng sẽ có nhiều học viên chưa có nguồn hàng. Thì 2 bên có thể kết nối, rồi hợp tác với nhau.',
       icon: <Users className="h-8 w-8" />,
     },
   ];
@@ -383,123 +391,123 @@ export default function ShopeeZoomLanding() {
 
   const faqData = [
     {
-      question: "Mình sẽ thanh toán như thế nào?",
+      question: 'Mình sẽ thanh toán như thế nào?',
       answer:
-        "Bạn có thể thanh toán cho Hiếu thông qua hình thức chuyển khoản ngân hàng. Nội dung chuyển khoản bạn chỉ cần điền SPXZ là được.\n\nThông tin chuyển khoản:\nTên: Cao Lê Ngọc Hiếu\nSTK Techcombank: 1581797979\nSTK Vietcombank: 9137377979\nSố tiền: 3990K\nNội dung: SPXZ",
+        'Bạn có thể thanh toán cho Hiếu thông qua hình thức chuyển khoản ngân hàng. Nội dung chuyển khoản bạn chỉ cần điền SPXZ là được.\n\nThông tin chuyển khoản:\nTên: Cao Lê Ngọc Hiếu\nSTK Techcombank: 1581797979\nSTK Vietcombank: 9137377979\nSố tiền: 3990K\nNội dung: SPXZ',
     },
     {
-      question: "Không có sản phẩm thì có tham gia lớp học được không Hiếu ơi?",
+      question: 'Không có sản phẩm thì có tham gia lớp học được không Hiếu ơi?',
       answer:
         'Trong khóa học Hiếu có hướng dẫn cách tìm sản phẩm, hướng dẫn cách nhập hàng và có cả học phần "dropship" – nghĩa là bán hàng mà không cần nhập hàng (chi phí gần như 0đ). Đây cũng là cách mà Hiếu khởi nghiệp với số vốn dưới 100K.\n\nNgoài ra, nếu bạn chưa có sản phẩm thì cũng có thể lấy gần 200 sản phẩm ở kho gia dụng của bên Hiếu bán trước để thực hành, sau này nếu đã có sản phẩm thì có thể tự xây riêng cho mình một shop khác nữa.\n\nP/s: Nếu shop gia dụng kia mà mỗi ngày ra được tầm 10 đơn, mỗi đơn lãi tầm 20k thôi. Thì mỗi tháng bạn sẽ có "thu nhập thụ động" là "10 đơn x 20k x 30 ngày" = 6tr/tháng. (công việc cũng đơn giản, vào check đơn và gửi thông tin cho Hiếu đóng gói thôi ^^)\n\nP/s 2: Và kho gia dụng này Hiếu chỉ dành cho học viên đăng ký khóa học thôi, người ngoài sẽ không biết và Hiếu cũng không công khai cho ai làm cả. (Bí mật và chỉ học viên ^^)',
     },
     {
-      question: "Có được xem lại video sau mỗi buổi học không Hiếu ơi?",
+      question: 'Có được xem lại video sau mỗi buổi học không Hiếu ơi?',
       answer:
-        "Có nghen bạn. Trong mỗi buổi học thì Hiếu sẽ quay lại màn hình (đủ video, đủ âm thành và mặt Hiếu hehe) để bạn có thể xem lại nếu hôm đó bận việc không tham gia được hoặc nếu quên bài muốn ôn tập lại.",
+        'Có nghen bạn. Trong mỗi buổi học thì Hiếu sẽ quay lại màn hình (đủ video, đủ âm thành và mặt Hiếu hehe) để bạn có thể xem lại nếu hôm đó bận việc không tham gia được hoặc nếu quên bài muốn ôn tập lại.',
     },
     {
-      question: "Thế có được học lại các khóa sau không Hiếu ơi?",
+      question: 'Thế có được học lại các khóa sau không Hiếu ơi?',
       answer:
-        "Hiện tại Hiếu đang có chính sách học lại MIỄN PHÍ cho tất cả các khóa trong tương lai. Ví dụ: bạn đăng ký học khóa K10, nhưng tới K15 bạn muốn học lại thì chỉ cần nhắn zalo báo trước để Hiếu sắp xếp là được nghen ^^",
+        'Hiện tại Hiếu đang có chính sách học lại MIỄN PHÍ cho tất cả các khóa trong tương lai. Ví dụ: bạn đăng ký học khóa K10, nhưng tới K15 bạn muốn học lại thì chỉ cần nhắn zalo báo trước để Hiếu sắp xếp là được nghen ^^',
     },
     {
-      question: "Quy trình học tập sẽ như thế nào Hiếu ơi?",
+      question: 'Quy trình học tập sẽ như thế nào Hiếu ơi?',
       answer:
-        "Sau khi thanh toán xong thì kết bạn và nhắn tin qua Zalo cho Hiếu để xác nhận (0931 459 459). Rồi đợi tới ngày để vào học, trước khi học thì Hiếu sẽ tạo nhóm Zalo, trước mỗi buổi học Hiếu sẽ gửi link Zoom để bạn tham gia vào lớp học.\n\nSau mỗi buổi học thì Hiếu sẽ gửi lại video quay màn hình để bạn tiện xem lại và thao tác kỹ thuật nếu quên bài.",
+        'Sau khi thanh toán xong thì kết bạn và nhắn tin qua Zalo cho Hiếu để xác nhận (0931 459 459). Rồi đợi tới ngày để vào học, trước khi học thì Hiếu sẽ tạo nhóm Zalo, trước mỗi buổi học Hiếu sẽ gửi link Zoom để bạn tham gia vào lớp học.\n\nSau mỗi buổi học thì Hiếu sẽ gửi lại video quay màn hình để bạn tiện xem lại và thao tác kỹ thuật nếu quên bài.',
     },
     {
-      question: "Học phí tương lai có tăng không Hiếu ơi?",
+      question: 'Học phí tương lai có tăng không Hiếu ơi?',
       answer:
-        "Chắc chắn là CÓ. Vì trong tương lai Hiếu sẽ update nhiều quyền lợi hơn, nhiều học phần hơn nữa và giá trị của khóa học này chắc chắn sẽ tăng nên học phí tăng là điều tất nhiên.",
+        'Chắc chắn là CÓ. Vì trong tương lai Hiếu sẽ update nhiều quyền lợi hơn, nhiều học phần hơn nữa và giá trị của khóa học này chắc chắn sẽ tăng nên học phí tăng là điều tất nhiên.',
     },
     {
-      question: "Mình có cần phải có shop để tham gia học không?",
+      question: 'Mình có cần phải có shop để tham gia học không?',
       answer:
-        "Chắc chắn là không cần thiết, vì trong khóa học Hiếu đã có phần hướng dẫn tạo shop và tối ưu shop chuẩn SEO rồi.",
-    },
-    {
-      question:
-        "Nếu không hài lòng thì mình có được hoàn lại học phí như cam kết không?",
-      answer:
-        "Nếu sau khi bạn học đủ 7 buổi, có tạo shop, rồi thực hành mà vẫn cảm thấy khóa học không thực sự hữu ích với bạn thì hãy nhắn qua Zalo cho Hiếu. Học phí sẽ được hoàn cho bạn đủ 100%",
+        'Chắc chắn là không cần thiết, vì trong khóa học Hiếu đã có phần hướng dẫn tạo shop và tối ưu shop chuẩn SEO rồi.',
     },
     {
       question:
-        "Khóa này có gì đặc biệt? Có gì khác so với các khóa học khác không?",
+        'Nếu không hài lòng thì mình có được hoàn lại học phí như cam kết không?',
       answer:
-        "Đây là khóa học Hiếu thiết kế dựa vào kinh nghiệm thực chiến 6 năm kinh doanh trên Shopee của mình, nó sẽ trải qua gồm 6 giai đoạn. Chúng ta sẽ học và thực hành theo lộ trình có sẵn của bên Hiếu. Điều này sẽ giúp bạn tiết kiệm thời gian thử sai, tiết kiệm nhiều tiền bạc hơn.",
+        'Nếu sau khi bạn học đủ 7 buổi, có tạo shop, rồi thực hành mà vẫn cảm thấy khóa học không thực sự hữu ích với bạn thì hãy nhắn qua Zalo cho Hiếu. Học phí sẽ được hoàn cho bạn đủ 100%',
     },
     {
-      question: "Nếu không hiểu chỗ nào thì mình hỏi Hiếu được không?",
+      question:
+        'Khóa này có gì đặc biệt? Có gì khác so với các khóa học khác không?',
       answer:
-        "Chắc chắn rồi. Bạn sẽ được Hiếu hỗ trợ trọn đời, hỗ trợ cho tới khi bạn bán được hàng.\n\nĐây là CAM KẾT của Hiếu, ngoài kia thì chỉ có hỗ trợ trên nhóm chat tổng hoặc đăng câu hỏi lên trên group tổng facebook mà thôi.\n\nĐối với Hiếu, đây là khóa tâm huyết của mình. Nên mọi vấn đề về bài học, thực hành bạn sẽ nhắn tin trực tiếp cho Hiếu. Hiếu sẽ là người hỗ trợ 1-1 bạn trực tiếp.",
+        'Đây là khóa học Hiếu thiết kế dựa vào kinh nghiệm thực chiến 6 năm kinh doanh trên Shopee của mình, nó sẽ trải qua gồm 6 giai đoạn. Chúng ta sẽ học và thực hành theo lộ trình có sẵn của bên Hiếu. Điều này sẽ giúp bạn tiết kiệm thời gian thử sai, tiết kiệm nhiều tiền bạc hơn.',
     },
     {
-      question: "Mình chưa kinh doanh online bao giờ thì có học được không?",
+      question: 'Nếu không hiểu chỗ nào thì mình hỏi Hiếu được không?',
       answer:
-        "Bạn yên tâm là trong khóa học Hiếu có đầy đủ các phần học, dù bạn chưa từng buôn bán kinh doanh online lần nào vẫn có thể học tập và làm được.",
+        'Chắc chắn rồi. Bạn sẽ được Hiếu hỗ trợ trọn đời, hỗ trợ cho tới khi bạn bán được hàng.\n\nĐây là CAM KẾT của Hiếu, ngoài kia thì chỉ có hỗ trợ trên nhóm chat tổng hoặc đăng câu hỏi lên trên group tổng facebook mà thôi.\n\nĐối với Hiếu, đây là khóa tâm huyết của mình. Nên mọi vấn đề về bài học, thực hành bạn sẽ nhắn tin trực tiếp cho Hiếu. Hiếu sẽ là người hỗ trợ 1-1 bạn trực tiếp.',
     },
     {
-      question: "Học xong thì mình có thể kiếm được bao nhiều tiền?",
+      question: 'Mình chưa kinh doanh online bao giờ thì có học được không?',
       answer:
-        "Hiếu không trả lời được câu hỏi này vì tiềm năng mà kinh doanh online mang lại là vô hạn. Sau đợt dịch vừa rồi thì bạn cũng biết là xu hướng mua sắm online của người dân đang rất cao, cứ cần cái gì là lên sàn Shopee để mua.\n\nBạn trẻ nhất học Hiếu và làm ra kết quả là chưa tới 18 tuổi. Người lớn tuổi nhất là một cô 60 tuổi có xưởng sản xuất hộp carton. Học viên đạt doanh thu cao nhất là một bạn sinh năm 1996 bán 4 tỉ / tháng.\n\nCó bạn học viên học xong làm sau 7 ngày là bán được đơn đầu tiên, những ngày sau đó đơn tăng đều từ 2 đơn lên 50 đơn / ngày.\n\nCũng có bạn làm mất 3 tháng mới ra được những đơn đầu tiên và dần dần phát triển lên.\n\nVề phần kết quả này nó cũng phụ thuộc nhiều vào sự kiên trì, nỗ lực, sự siêng năng của bạn nữa.\n\nChắc chắn là trong quá trình học và làm sẽ gặp khó khăn, Hiếu sẽ bên cạnh đồng hành cùng bạn, hỗ trợ cho bạn. Bạn cứ an tâm nghen!",
+        'Bạn yên tâm là trong khóa học Hiếu có đầy đủ các phần học, dù bạn chưa từng buôn bán kinh doanh online lần nào vẫn có thể học tập và làm được.',
     },
     {
-      question: "Mình không biết dùng máy tính thì có làm được không?",
+      question: 'Học xong thì mình có thể kiếm được bao nhiều tiền?',
       answer:
-        "Sẽ hơi khó một tí. Gần đây Hiếu có một anh học viên, anh ấy làm nghề sửa xe máy, không am hiểu về máy tính và công nghệ. Nhưng anh ấy rất chịu khó tìm tòi học hỏi, cái nào không biết thì tra google, hỏi thêm Hiếu. Cuối cùng cũng bán được vài đơn đầu tiên sau 30 ngày học (ảnh bán phụ tùng xe máy trên Shopee).",
+        'Hiếu không trả lời được câu hỏi này vì tiềm năng mà kinh doanh online mang lại là vô hạn. Sau đợt dịch vừa rồi thì bạn cũng biết là xu hướng mua sắm online của người dân đang rất cao, cứ cần cái gì là lên sàn Shopee để mua.\n\nBạn trẻ nhất học Hiếu và làm ra kết quả là chưa tới 18 tuổi. Người lớn tuổi nhất là một cô 60 tuổi có xưởng sản xuất hộp carton. Học viên đạt doanh thu cao nhất là một bạn sinh năm 1996 bán 4 tỉ / tháng.\n\nCó bạn học viên học xong làm sau 7 ngày là bán được đơn đầu tiên, những ngày sau đó đơn tăng đều từ 2 đơn lên 50 đơn / ngày.\n\nCũng có bạn làm mất 3 tháng mới ra được những đơn đầu tiên và dần dần phát triển lên.\n\nVề phần kết quả này nó cũng phụ thuộc nhiều vào sự kiên trì, nỗ lực, sự siêng năng của bạn nữa.\n\nChắc chắn là trong quá trình học và làm sẽ gặp khó khăn, Hiếu sẽ bên cạnh đồng hành cùng bạn, hỗ trợ cho bạn. Bạn cứ an tâm nghen!',
     },
     {
-      question: "Mình nên bán ở sàn nào trước tiên?",
+      question: 'Mình không biết dùng máy tính thì có làm được không?',
+      answer:
+        'Sẽ hơi khó một tí. Gần đây Hiếu có một anh học viên, anh ấy làm nghề sửa xe máy, không am hiểu về máy tính và công nghệ. Nhưng anh ấy rất chịu khó tìm tòi học hỏi, cái nào không biết thì tra google, hỏi thêm Hiếu. Cuối cùng cũng bán được vài đơn đầu tiên sau 30 ngày học (ảnh bán phụ tùng xe máy trên Shopee).',
+    },
+    {
+      question: 'Mình nên bán ở sàn nào trước tiên?',
       answer:
         'Thành thật thì Hiếu vẫn khuyên bạn nên bán trên Shopee đầu tiên vì nó dễ hơn hơn Lazada, TiktokShop rất nhiều.\n\nTừ tháng 6 năm 2023 Hiếu đã nghiên cứu giáo án giảng dạy cho sàn Lazada (có casestudy kết quả thực tế của Hiếu), nên có thể đầu năm 2024 Hiếu sẽ mở lớp Lazada.\n\nVì Lazada khó hơn Shopee nên chi phí đầu tư học cũng sẽ cao hơn, nhưng Lazada sẽ là "Cú nhảy vọt" giúp cho bạn x3 x5 thậm chí x10 đơn hàng nếu làm ĐÚNG.\n\nHọc phí Hiếu đang dự kiến là 6990k/học viên, nếu đăng ký combo cho Shopee x Lazada thì học phí chỉ còn 7990K cho Shopee x Lazada (lịch học Lazada Hiếu sẽ thông báo sau, còn lịch học Shopee thì như trên nghen).',
     },
     {
-      question: "Mình sẽ được hỗ trợ qua kênh nào Hiếu?",
+      question: 'Mình sẽ được hỗ trợ qua kênh nào Hiếu?',
       answer:
-        "Trong quá trình học và sau khi học xong thì Hiếu vẫn hỗ trợ cho bạn, cho dù 2 năm 5 năm nữa mà bạn có làm thì Hiếu vẫn hỗ trợ, cho dù bạn có tạo shop thứ 2 thứ 3 thì Hiếu cũng vẫn sẽ đồng hành cùng bạn.\n\nHiếu sẽ hỗ trợ trực tiếp 1-1 qua Zalo, có 1 nhóm chat và 1 group facebook để cả lớp giao lưu.",
+        'Trong quá trình học và sau khi học xong thì Hiếu vẫn hỗ trợ cho bạn, cho dù 2 năm 5 năm nữa mà bạn có làm thì Hiếu vẫn hỗ trợ, cho dù bạn có tạo shop thứ 2 thứ 3 thì Hiếu cũng vẫn sẽ đồng hành cùng bạn.\n\nHiếu sẽ hỗ trợ trực tiếp 1-1 qua Zalo, có 1 nhóm chat và 1 group facebook để cả lớp giao lưu.',
     },
     {
-      question: "Hiếu có chắc chắn cam kết giúp mình kiếm được tiền không?",
+      question: 'Hiếu có chắc chắn cam kết giúp mình kiếm được tiền không?',
       answer:
-        "Trong khóa học Hiếu dạy toàn bộ kiến thức, quy trình mà bên Hiếu đang làm (bao gồm tự làm và làm cho doanh nghiệp). Cho tới thời điểm hiện tại thì bộ quy trình làm này vẫn mang lại doanh thu rất tốt cho hệ thống kinh doanh bên Hiếu.\n\nHiếu dám tự tin rằng, bạn chỉ cần áp dụng và làm theo những gì Hiếu chia sẻ trong khóa học này thì sẽ ra được kết quả, sẽ kiếm được tiền.\n\nNhưng điều đó cũng còn phụ thuộc vào bạn nữa, vì bạn phải kiên trì học và thực hành theo trong vài tuần. Có bạn thì học xong 1 tuần là có kết quả, nhưng cũng có bạn mất 12-15 tuần. Nên là ra số, ra đơn cũng là do bạn chịu làm hay không nữa.",
+        'Trong khóa học Hiếu dạy toàn bộ kiến thức, quy trình mà bên Hiếu đang làm (bao gồm tự làm và làm cho doanh nghiệp). Cho tới thời điểm hiện tại thì bộ quy trình làm này vẫn mang lại doanh thu rất tốt cho hệ thống kinh doanh bên Hiếu.\n\nHiếu dám tự tin rằng, bạn chỉ cần áp dụng và làm theo những gì Hiếu chia sẻ trong khóa học này thì sẽ ra được kết quả, sẽ kiếm được tiền.\n\nNhưng điều đó cũng còn phụ thuộc vào bạn nữa, vì bạn phải kiên trì học và thực hành theo trong vài tuần. Có bạn thì học xong 1 tuần là có kết quả, nhưng cũng có bạn mất 12-15 tuần. Nên là ra số, ra đơn cũng là do bạn chịu làm hay không nữa.',
     },
     {
       question:
-        "Giờ nhảy vào kinh doanh ở sàn TMĐT thì có sợ bão hòa rồi không?",
+        'Giờ nhảy vào kinh doanh ở sàn TMĐT thì có sợ bão hòa rồi không?',
       answer:
-        "Hồi 2019 Hiếu có nhảy qua chạy quảng cáo trên facebook bán thử, lúc đó Hiếu cũng sợ là bão hòa vì 2014 tới 2019 là 5 năm, ai cũng bán rất mạnh. Sau 5 năm nhảy vào có bão hòa không? Hiếu có nỗi sợ đó, nhưng mà vẫn quyết định thử. Cuối cùng team mình đã phát triển 1 sản phẩm và chạy doanh thu khoảng 1.2 – 1.5 tỉ / tháng với 1 dòng sản phẩm.\n\nVà bạn cũng biết là kinh doanh online là xu hướng của thế giới (có cả Việt Nam), nên bây giờ bắt đầu nhảy vào thì có khi lại ngon ý chứ. Còn chuyện bão hòa hay không thì Hiếu không biết, vì Hiếu thấy ai làm cũng ra số cả, thì bão hòa ở đâu ta?\n\nChỉ có điều là bây giờ nhảy vào nó sẽ hơi khó hơn ngày xưa 1 tí thôi. Khó ở đây có nghĩa là bạn phải làm chuẩn chỉnh, không phải như hồi xưa đăng đại tấm hình lên là bán được. Mà bây giờ hình phải đẹp, mô tả tiêu đều phải chuẩn SEO…",
+        'Hồi 2019 Hiếu có nhảy qua chạy quảng cáo trên facebook bán thử, lúc đó Hiếu cũng sợ là bão hòa vì 2014 tới 2019 là 5 năm, ai cũng bán rất mạnh. Sau 5 năm nhảy vào có bão hòa không? Hiếu có nỗi sợ đó, nhưng mà vẫn quyết định thử. Cuối cùng team mình đã phát triển 1 sản phẩm và chạy doanh thu khoảng 1.2 – 1.5 tỉ / tháng với 1 dòng sản phẩm.\n\nVà bạn cũng biết là kinh doanh online là xu hướng của thế giới (có cả Việt Nam), nên bây giờ bắt đầu nhảy vào thì có khi lại ngon ý chứ. Còn chuyện bão hòa hay không thì Hiếu không biết, vì Hiếu thấy ai làm cũng ra số cả, thì bão hòa ở đâu ta?\n\nChỉ có điều là bây giờ nhảy vào nó sẽ hơi khó hơn ngày xưa 1 tí thôi. Khó ở đây có nghĩa là bạn phải làm chuẩn chỉnh, không phải như hồi xưa đăng đại tấm hình lên là bán được. Mà bây giờ hình phải đẹp, mô tả tiêu đều phải chuẩn SEO…',
     },
     {
-      question: "Bắt �� ��u thì vốn khoảng bao nhiều Hiếu?",
+      question: 'Bắt �� ��u thì vốn khoảng bao nhiều Hiếu?',
       answer:
-        "Khi bắt đầu thực ra Hiếu có vốn khoảng 50k. Số tiền này để ăn mì tôm á, chớ không phải tiền nhập hàng đầu. Việc của Hiếu là đi tìm shop sỉ, ra xin chụp ảnh rồi đăng lên sàn bán, khi có đơn thì ra mua lẻ từng cái rồi về đóng gói giao cho khách. Tính ra nhập 1 sản phẩm chỉ tốn có 25k thôi.\n\nNhưng bây giờ thì cũng khác hồi xưa rồi nha, thành thực mà nói thì Hiếu vẫn khuyên bạn nên có 1 ít vốn trước khi bắt tay vào việc kinh doanh này. Tối thiểu là 3 triệu đồng (đối với người đi làm), còn với sinh viên thì có sức trẻ, sức khỏe, chịu cày thì tầm dưới 1 triệu đồng là ổn.",
+        'Khi bắt đầu thực ra Hiếu có vốn khoảng 50k. Số tiền này để ăn mì tôm á, chớ không phải tiền nhập hàng đầu. Việc của Hiếu là đi tìm shop sỉ, ra xin chụp ảnh rồi đăng lên sàn bán, khi có đơn thì ra mua lẻ từng cái rồi về đóng gói giao cho khách. Tính ra nhập 1 sản phẩm chỉ tốn có 25k thôi.\n\nNhưng bây giờ thì cũng khác hồi xưa rồi nha, thành thực mà nói thì Hiếu vẫn khuyên bạn nên có 1 ít vốn trước khi bắt tay vào việc kinh doanh này. Tối thiểu là 3 triệu đồng (đối với người đi làm), còn với sinh viên thì có sức trẻ, sức khỏe, chịu cày thì tầm dưới 1 triệu đồng là ổn.',
     },
     {
-      question: "Có nhóm kín dành riêng cho học viên không Hiếu?",
+      question: 'Có nhóm kín dành riêng cho học viên không Hiếu?',
       answer:
-        "Chắc chắc là có rồi nghen. Mỗi khóa học Hiếu sẽ tạo 1 nhóm lớp riêng để cho cả lớp giao lưu, trao đổi chia sẻ kiến thức. Ngoài ra chúng ta sẽ có cộng đồng riêng (chỉ dành riêng cho Học viên, người ngoài sẽ không được vào).",
+        'Chắc chắc là có rồi nghen. Mỗi khóa học Hiếu sẽ tạo 1 nhóm lớp riêng để cho cả lớp giao lưu, trao đổi chia sẻ kiến thức. Ngoài ra chúng ta sẽ có cộng đồng riêng (chỉ dành riêng cho Học viên, người ngoài sẽ không được vào).',
     },
     {
-      question: "Nhóm bí mật chéo đơn kiếm 100-500 đánh giá là cái gì đó Hiếu?",
+      question: 'Nhóm bí mật chéo đơn kiếm 100-500 đánh giá là cái gì đó Hiếu?',
       answer:
-        "À phần này xịn nhất luôn đó, vì sao? Vì khi bạn là học viên thì sẽ được Hiếu mời tham gia vào nhóm kín chỉ dành cho học viên (không phải là học viên thì không được vô), nhóm này Hiếu tạo ra để cho các bạn học viên chéo đơn với nhau.\n\nVí dụ bạn học xong, bạn tạo shop, bạn muốn có 150 đánh giá 5 sao để tăng độ uy tín cho shop thì… rất là đơn giản. Chỉ cần vào nhóm lớp, nhắn 1 tin là có gần 300 bạn học viên (con số sẽ tăng sau mỗi khoá học) đẩy đơn, đẩy đánh giá cho bạn ngay. Vì sao học viên lại hỗ trợ nhau? Bí mật sẽ được bật mí ở buổi học thứ 5 ^^",
+        'À phần này xịn nhất luôn đó, vì sao? Vì khi bạn là học viên thì sẽ được Hiếu mời tham gia vào nhóm kín chỉ dành cho học viên (không phải là học viên thì không được vô), nhóm này Hiếu tạo ra để cho các bạn học viên chéo đơn với nhau.\n\nVí dụ bạn học xong, bạn tạo shop, bạn muốn có 150 đánh giá 5 sao để tăng độ uy tín cho shop thì… rất là đơn giản. Chỉ cần vào nhóm lớp, nhắn 1 tin là có gần 300 bạn học viên (con số sẽ tăng sau mỗi khoá học) đẩy đơn, đẩy đánh giá cho bạn ngay. Vì sao học viên lại hỗ trợ nhau? Bí mật sẽ được bật mí ở buổi học thứ 5 ^^',
     },
   ];
 
   const paymentInfo = {
     bankAccounts: [
       {
-        bank: "Techcombank",
-        accountNumber: "1581797979",
-        accountName: "CAO LE NGOC HIEU",
+        bank: 'Techcombank',
+        accountNumber: '1581797979',
+        accountName: 'CAO LE NGOC HIEU',
       },
     ],
-    totalAmount: "3.990.000 VND",
+    totalAmount: '3.990.000 VND',
     instructions: [
-      "Chụp ảnh bill chuyển khoản",
-      "Gửi ảnh bill cho Hiếu qua Zalo: 0931 459 459",
-      "Hiếu gửi form thông tin lớp",
+      'Chụp ảnh bill chuyển khoản',
+      'Gửi ảnh bill cho Hiếu qua Zalo: 0931 459 459',
+      'Hiếu gửi form thông tin lớp',
     ],
   };
 
@@ -508,98 +516,98 @@ export default function ShopeeZoomLanding() {
     {
       id: 1,
       image: hieuresultImg,
-      title: "Doanh số 4 ngày đột phá",
-      subtitle: "675 đơn - 199.9tr doanh thu",
-      description: "Shop bán gia dụng trong 4 ngày liên tiếp",
-      stats: "169 đơn/ngày TB",
+      title: 'Doanh số 4 ngày đột phá',
+      subtitle: '675 đơn - 199.9tr doanh thu',
+      description: 'Shop bán gia dụng trong 4 ngày liên tiếp',
+      stats: '169 đơn/ngày TB',
     },
     {
       id: 2,
       image: hieuresultImg,
-      title: "Kết quả tháng 11/2023",
-      subtitle: "3000+ đơn trong tháng",
-      description: "Tổng hợp từ 7 shop đang vận hành",
-      stats: "100+ đơn/ngày",
+      title: 'Kết quả tháng 11/2023',
+      subtitle: '3000+ đơn trong tháng',
+      description: 'Tổng hợp từ 7 shop đang vận hành',
+      stats: '100+ đơn/ngày',
     },
     {
       id: 3,
       image: hieuresultImg,
-      title: "Shop #1 - Gia dụng",
-      subtitle: "203 đơn - 61.4tr/ngày",
-      description: "Peak performance ngày 18/11",
-      stats: "Top 1% seller",
+      title: 'Shop #1 - Gia dụng',
+      subtitle: '203 đơn - 61.4tr/ngày',
+      description: 'Peak performance ngày 18/11',
+      stats: 'Top 1% seller',
     },
     {
       id: 4,
       image: hieuresultImg,
-      title: "Shop #2 - Thời trang",
-      subtitle: "156 đơn - 47.2tr/ngày",
-      description: "Stable growth trong Q4",
-      stats: "15% conversion rate",
+      title: 'Shop #2 - Thời trang',
+      subtitle: '156 đơn - 47.2tr/ngày',
+      description: 'Stable growth trong Q4',
+      stats: '15% conversion rate',
     },
     {
       id: 5,
       image: hieuresultImg,
-      title: "Shop #3 - Điện tử",
-      subtitle: "189 đơn - 52.8tr/ngày",
-      description: "Black Friday performance",
-      stats: "25% repeat customers",
+      title: 'Shop #3 - Điện tử',
+      subtitle: '189 đơn - 52.8tr/ngày',
+      description: 'Black Friday performance',
+      stats: '25% repeat customers',
     },
     {
       id: 6,
       image: hieuresultImg,
-      title: "Shop #4 - Mỹ phẩm",
-      subtitle: "127 đơn - 38.5tr/ngày",
-      description: "Organic traffic growth",
-      stats: "40% from SEO",
+      title: 'Shop #4 - Mỹ phẩm',
+      subtitle: '127 đơn - 38.5tr/ngày',
+      description: 'Organic traffic growth',
+      stats: '40% from SEO',
     },
     {
       id: 7,
       image: hieuresultImg,
-      title: "6 năm kinh nghiệm",
-      subtitle: "Từ 0 lên 7 shop",
-      description: "Hành trình xây dựng empire",
-      stats: "1000+ sản phẩm",
+      title: '6 năm kinh nghiệm',
+      subtitle: 'Từ 0 lên 7 shop',
+      description: 'Hành trình xây dựng empire',
+      stats: '1000+ sản phẩm',
     },
     {
       id: 8,
       image: hieuresultImg,
-      title: "Tổng kết Q4/2023",
-      subtitle: "Revenue milestone đạt được",
-      description: "Quý cao nhất trong năm",
-      stats: "300% YoY growth",
+      title: 'Tổng kết Q4/2023',
+      subtitle: 'Revenue milestone đạt được',
+      description: 'Quý cao nhất trong năm',
+      stats: '300% YoY growth',
     },
     {
       id: 9,
       image: hieuresultImg,
-      title: "11.11 Sale Event",
-      subtitle: "Peak day performance",
-      description: "Ngày bán cao nhất năm",
-      stats: "500+ đơn/24h",
+      title: '11.11 Sale Event',
+      subtitle: 'Peak day performance',
+      description: 'Ngày bán cao nhất năm',
+      stats: '500+ đơn/24h',
     },
     {
       id: 10,
       image: hieuresultImg,
-      title: "12.12 Mega Sale",
-      subtitle: "Breakthrough results",
-      description: "Vượt mục tiêu đề ra 150%",
-      stats: "ROI 400%",
+      title: '12.12 Mega Sale',
+      subtitle: 'Breakthrough results',
+      description: 'Vượt mục tiêu đề ra 150%',
+      stats: 'ROI 400%',
     },
     {
       id: 11,
       image: hieuresultImg,
-      title: "Tết Nguyên Đán",
-      subtitle: "Holiday season boom",
-      description: "Seasonal products trending",
-      stats: "600+ đơn/ngày",
+      title: 'Tết Nguyên Đán',
+      subtitle: 'Holiday season boom',
+      description: 'Seasonal products trending',
+      stats: '600+ đơn/ngày',
     },
     {
       id: 12,
       image: hieuresultImg,
-      title: "Portfolio overview",
-      subtitle: "7 shops tổng quan",
-      description: "Multi-category business model",
-      stats: "Avg 430 đơn/shop",
+      title: 'Portfolio overview',
+      subtitle: '7 shops tổng quan',
+      description: 'Multi-category business model',
+      stats: 'Avg 430 đơn/shop',
     },
   ];
 
@@ -607,196 +615,196 @@ export default function ShopeeZoomLanding() {
     {
       id: 1,
       image: studentresultImg,
-      title: "392+ học viên thành công",
-      subtitle: "Tỷ lệ thành công 95%",
-      description: "Sau 2-3 tháng học và thực hành",
-      stats: "Avg 1000+ đơn/tháng",
+      title: '392+ học viên thành công',
+      subtitle: 'Tỷ lệ thành công 95%',
+      description: 'Sau 2-3 tháng học và thực hành',
+      stats: 'Avg 1000+ đơn/tháng',
     },
     {
       id: 2,
       image: studentresultImg,
-      title: "Phước Đức K06",
-      subtitle: "1500 đơn/tháng stable",
-      description: "Từ 0 kinh nghiệm lên top seller",
-      stats: "ROI 300%/tháng",
+      title: 'Phước Đức K06',
+      subtitle: '1500 đơn/tháng stable',
+      description: 'Từ 0 kinh nghiệm lên top seller',
+      stats: 'ROI 300%/tháng',
     },
     {
       id: 3,
       image: studentresultImg,
-      title: "Quốc Vũ K08",
-      subtitle: "200tr doanh thu/tháng",
-      description: "Mẹ và bé category breakthrough",
-      stats: "x10 growth in 6 months",
+      title: 'Quốc Vũ K08',
+      subtitle: '200tr doanh thu/tháng',
+      description: 'Mẹ và bé category breakthrough',
+      stats: 'x10 growth in 6 months',
     },
     {
       id: 4,
       image: studentresultImg,
-      title: "Chị Thanh K06",
-      subtitle: "32 đơn peak day 11.11",
-      description: "Từ 6 gian hàng hội chợ lên Shopee",
-      stats: "Digital transformation",
+      title: 'Chị Thanh K06',
+      subtitle: '32 đơn peak day 11.11',
+      description: 'Từ 6 gian hàng hội chợ lên Shopee',
+      stats: 'Digital transformation',
     },
     {
       id: 5,
       image: studentresultImg,
-      title: "K12 Success Stories",
-      subtitle: "100% completion rate",
-      description: "Latest cohort outstanding results",
-      stats: "Avg 2 months to profit",
+      title: 'K12 Success Stories',
+      subtitle: '100% completion rate',
+      description: 'Latest cohort outstanding results',
+      stats: 'Avg 2 months to profit',
     },
     {
       id: 6,
       image: studentresultImg,
-      title: "Corporate Trainees",
-      subtitle: "Side hustle success",
-      description: "Office workers building passive income",
-      stats: "10-30tr extra income",
+      title: 'Corporate Trainees',
+      subtitle: 'Side hustle success',
+      description: 'Office workers building passive income',
+      stats: '10-30tr extra income',
     },
     {
       id: 7,
       image: studentresultImg,
-      title: "Factory Owners",
-      subtitle: "Direct-to-consumer wins",
-      description: "Eliminating middleman costs",
-      stats: "40% margin improvement",
+      title: 'Factory Owners',
+      subtitle: 'Direct-to-consumer wins',
+      description: 'Eliminating middleman costs',
+      stats: '40% margin improvement',
     },
     {
       id: 8,
       image: studentresultImg,
-      title: "Young Entrepreneurs",
-      subtitle: "Gen Z success stories",
-      description: "Students building 6-figure businesses",
-      stats: "Age 18-25 top performers",
+      title: 'Young Entrepreneurs',
+      subtitle: 'Gen Z success stories',
+      description: 'Students building 6-figure businesses',
+      stats: 'Age 18-25 top performers',
     },
     {
       id: 9,
       image: studentresultImg,
-      title: "Single Parents",
-      subtitle: "Financial independence",
-      description: "Work-from-home success cases",
-      stats: "Flexible income streams",
+      title: 'Single Parents',
+      subtitle: 'Financial independence',
+      description: 'Work-from-home success cases',
+      stats: 'Flexible income streams',
     },
     {
       id: 10,
       image: studentresultImg,
-      title: "Rural Entrepreneurs",
-      subtitle: "Geographic barriers broken",
-      description: "Small towns accessing global markets",
-      stats: "50+ provinces represented",
+      title: 'Rural Entrepreneurs',
+      subtitle: 'Geographic barriers broken',
+      description: 'Small towns accessing global markets',
+      stats: '50+ provinces represented',
     },
     {
       id: 11,
       image: studentresultImg,
-      title: "Career Changers",
-      subtitle: "Professional transitions",
-      description: "From traditional jobs to e-commerce",
-      stats: "90% retention rate",
+      title: 'Career Changers',
+      subtitle: 'Professional transitions',
+      description: 'From traditional jobs to e-commerce',
+      stats: '90% retention rate',
     },
     {
       id: 12,
       image: studentresultImg,
-      title: "Success Metrics 2024",
-      subtitle: "Year-end performance",
-      description: "Comprehensive student achievement data",
-      stats: "2-3 months average to 1000 orders",
+      title: 'Success Metrics 2024',
+      subtitle: 'Year-end performance',
+      description: 'Comprehensive student achievement data',
+      stats: '2-3 months average to 1000 orders',
     },
   ];
 
   const studentFeedbackData = [
     {
       id: 1,
-      name: "Minh Anh",
+      name: 'Minh Anh',
       feedback:
-        "Doanh thu tăng 300% sau 2 tháng h � ��c. Khóa học rất chi tiết và thực tế!",
-      shopeeLink: "shope.ee/minhanh_shop",
-      achievement: "Shop thời trang nữ",
+        'Doanh thu tăng 300% sau 2 tháng h � ��c. Khóa học rất chi tiết và thực tế!',
+      shopeeLink: 'shope.ee/minhanh_shop',
+      achievement: 'Shop thời trang nữ',
     },
     {
       id: 2,
-      name: "Hoàng Long",
+      name: 'Hoàng Long',
       feedback:
-        "Điện tử công nghệ từ 0 lên 3500 đơn/tháng. Cảm ơn thầy Hiếu rất nhiều!",
-      shopeeLink: "shope.ee/hoanglong_tech",
-      achievement: "3500 đơn/tháng",
+        'Điện tử công nghệ từ 0 lên 3500 đơn/tháng. Cảm ơn thầy Hiếu rất nhiều!',
+      shopeeLink: 'shope.ee/hoanglong_tech',
+      achievement: '3500 đơn/tháng',
     },
     {
       id: 3,
-      name: "Thảo My",
+      name: 'Thảo My',
       feedback:
-        "Handmade products bán được 800 đơn/tháng ổn định. Khóa học đáng đồng tiền bát gạo.",
-      shopeeLink: "shope.ee/thaomy_beauty",
-      achievement: "Mỹ phẩm handmade",
+        'Handmade products bán được 800 đơn/tháng ổn định. Khóa học đáng đồng tiền bát gạo.',
+      shopeeLink: 'shope.ee/thaomy_beauty',
+      achievement: 'Mỹ phẩm handmade',
     },
     {
       id: 4,
-      name: "Đình Khôi",
+      name: 'Đình Khôi',
       feedback:
-        "Đồ thể thao 1200 đơn/tháng. Phương pháp của thầy rất hiệu quả và dễ hiểu.",
-      shopeeLink: "shope.ee/dinhkhoi_sports",
-      achievement: "1200 đơn/tháng",
+        'Đồ thể thao 1200 đơn/tháng. Phương pháp của thầy rất hiệu quả và dễ hiểu.',
+      shopeeLink: 'shope.ee/dinhkhoi_sports',
+      achievement: '1200 đơn/tháng',
     },
     {
       id: 5,
-      name: "Văn Đức",
+      name: 'Văn Đức',
       feedback:
-        "Gia dụng 2500 đơn/tháng. Life-changing course, recommended 100%!",
-      shopeeLink: "shope.ee/vanduc_official",
-      achievement: "2500 đơn/tháng",
+        'Gia dụng 2500 đơn/tháng. Life-changing course, recommended 100%!',
+      shopeeLink: 'shope.ee/vanduc_official',
+      achievement: '2500 đơn/tháng',
     },
     {
       id: 6,
-      name: "Thu Hằng",
+      name: 'Thu Hằng',
       feedback:
-        "Mỹ phẩm breakthrough từ nghi ngờ thành tin tưởng. Kết quả vượt mong đợi!",
-      shopeeLink: "shope.ee/thuhuong_store",
-      achievement: "Shop mỹ phẩm",
+        'Mỹ phẩm breakthrough từ nghi ngờ thành tin tưởng. Kết quả vượt mong đợi!',
+      shopeeLink: 'shope.ee/thuhuong_store',
+      achievement: 'Shop mỹ phẩm',
     },
     {
       id: 7,
-      name: "Hải Nam",
-      feedback: "Phụ kiện tech ROI vượt mong đợi. Investment tốt nhất năm nay!",
-      shopeeLink: "shope.ee/hainam_tech",
-      achievement: "Tech accessories",
+      name: 'Hải Nam',
+      feedback: 'Phụ kiện tech ROI vượt mong đợi. Investment tốt nhất năm nay!',
+      shopeeLink: 'shope.ee/hainam_tech',
+      achievement: 'Tech accessories',
     },
     {
       id: 8,
-      name: "Lan Phương",
+      name: 'Lan Phương',
       feedback:
-        "Mẹ đơn thân kinh doanh thành công. Inspiring journey với sản phẩm mẹ và bé.",
-      shopeeLink: "shope.ee/lanphuong_baby",
-      achievement: "Baby products",
+        'Mẹ đơn thân kinh doanh thành công. Inspiring journey với sản phẩm mẹ và bé.',
+      shopeeLink: 'shope.ee/lanphuong_baby',
+      achievement: 'Baby products',
     },
     {
       id: 9,
-      name: "Tuấn Kiệt",
+      name: 'Tuấn Kiệt',
       feedback:
-        "Dụng cụ thể thao empire. Phân tích value khóa học rất chi tiết và thực tế.",
-      shopeeLink: "shope.ee/tuankiet_sports",
-      achievement: "Sports equipment",
+        'Dụng cụ thể thao empire. Phân tích value khóa học rất chi tiết và thực tế.',
+      shopeeLink: 'shope.ee/tuankiet_sports',
+      achievement: 'Sports equipment',
     },
     {
       id: 10,
-      name: "Mai Linh",
+      name: 'Mai Linh',
       feedback:
-        "Trang sức thời trang trending. Social proof và recommendation xuất sắc!",
-      shopeeLink: "shope.ee/mailinh_jewelry",
-      achievement: "Fashion jewelry",
+        'Trang sức thời trang trending. Social proof và recommendation xuất sắc!',
+      shopeeLink: 'shope.ee/mailinh_jewelry',
+      achievement: 'Fashion jewelry',
     },
     {
       id: 11,
-      name: "Đại Nghĩa",
+      name: 'Đại Nghĩa',
       feedback:
-        "Đồ trang trí nhà specialist. Course content comprehensive và detailed.",
-      shopeeLink: "shope.ee/dainghia_homedecor",
-      achievement: "Home decor",
+        'Đồ trang trí nhà specialist. Course content comprehensive và detailed.',
+      shopeeLink: 'shope.ee/dainghia_homedecor',
+      achievement: 'Home decor',
     },
     {
       id: 12,
-      name: "Bích Phương",
+      name: 'Bích Phương',
       feedback:
-        "Đồ gia dụng 2200 đơn/tháng ổn định. Highly recommended cho newcomers!",
-      shopeeLink: "shope.ee/bichphuong_home",
-      achievement: "2200 đơn/tháng",
+        'Đồ gia dụng 2200 đơn/tháng ổn định. Highly recommended cho newcomers!',
+      shopeeLink: 'shope.ee/bichphuong_home',
+      achievement: '2200 đơn/tháng',
     },
   ];
 
@@ -804,27 +812,27 @@ export default function ShopeeZoomLanding() {
     // Update selected package info based on price
     let packageInfo;
     switch (price) {
-      case "3990K":
+      case '3990K':
         packageInfo = {
           name: courseName,
-          price: "3990K",
-          fullAmount: "3.990.000 VND",
-          qrCode: "/attached_assets/IMG_6900_1758442234405.JPG",
+          price: '3990K',
+          fullAmount: '3.990.000 VND',
+          qrCode: '/attached_assets/IMG_6900_1758442234405.JPG',
         };
         break;
-      case "8950K":
+      case '8950K':
         packageInfo = {
           name: courseName,
-          price: "8950K",
-          fullAmount: "8.950.000 VND",
+          price: '8950K',
+          fullAmount: '8.950.000 VND',
           qrCode: tiktokShopeeQr,
         };
         break;
-      case "9990K":
+      case '9990K':
         packageInfo = {
           name: courseName,
-          price: "9990K",
-          fullAmount: "9.990.000 VND",
+          price: '9990K',
+          fullAmount: '9.990.000 VND',
           qrCode: comboVipQr,
         };
         break;
@@ -832,15 +840,15 @@ export default function ShopeeZoomLanding() {
         packageInfo = {
           name: courseName,
           price: price,
-          fullAmount: "3.990.000 VND",
-          qrCode: "/attached_assets/IMG_6900_1758442234405.JPG",
+          fullAmount: '3.990.000 VND',
+          qrCode: '/attached_assets/IMG_6900_1758442234405.JPG',
         };
     }
 
     setSelectedPackage(packageInfo);
 
     // Scroll to payment section
-    scrollToSection("thanhtoan");
+    scrollToSection('thanhtoan');
 
     console.log(`Registration for ${courseName} at ${price}`);
   };
@@ -848,107 +856,107 @@ export default function ShopeeZoomLanding() {
   const benefits = [
     {
       icon: <Target className="h-6 w-6" />,
-      title: "Tạo ra được nhiều shop trên Shopee có đơn nhiều",
+      title: 'Tạo ra được nhiều shop trên Shopee có đơn nhiều',
       description:
-        "Bạn sẽ được cung cấp toàn bộ các cách làm, nội dung, tài liệu hướng dẫn, sự hỗ trợ 1-1 từ Hiếu",
+        'Bạn sẽ được cung cấp toàn bộ các cách làm, nội dung, tài liệu hướng dẫn, sự hỗ trợ 1-1 từ Hiếu',
     },
     {
       icon: <Zap className="h-6 w-6" />,
-      title: "Kỹ năng tạo ra đơn cho shop hoàn toàn tự động",
+      title: 'Kỹ năng tạo ra đơn cho shop hoàn toàn tự động',
       description:
-        "Tạo ra shop CHỈNH CHU, ĐẸP mang lại doanh thu, đơn hàng tự động (kể cả lúc ngủ hay đang đi du lịch)!",
+        'Tạo ra shop CHỈNH CHU, ĐẸP mang lại doanh thu, đơn hàng tự động (kể cả lúc ngủ hay đang đi du lịch)!',
     },
     {
       icon: <TrendingUp className="h-6 w-6" />,
-      title: "Kỹ năng SEO cho sản phẩm và Shop lên TOP 1",
+      title: 'Kỹ năng SEO cho sản phẩm và Shop lên TOP 1',
       description:
-        "Đẩy được thứ hạng của sản phẩm lên TOP của sàn và thu hút được rất nhiều khách hàng",
+        'Đẩy được thứ hạng của sản phẩm lên TOP của sàn và thu hút được rất nhiều khách hàng',
     },
   ];
 
   const problems = [
     {
-      number: "01",
-      title: "Không biết bắt đầu từ đâu",
+      number: '01',
+      title: 'Không biết bắt đầu từ đâu',
       points: [
-        "Chưa biết bắt đầu kinh doanh trên shopee từ đâu, làm như thế nào",
-        "Không biết bây giờ cần phải làm gì để bán được hàng hóa",
-        "Chưa nắm rõ quy trình nên bị mông lung, lan man nhiều thứ",
-        "Kiến thức trên mạng quá nhiều, mỗi người lại nói 1 kiểu",
+        'Chưa biết bắt đầu kinh doanh trên shopee từ đâu, làm như thế nào',
+        'Không biết bây giờ cần phải làm gì để bán được hàng hóa',
+        'Chưa nắm rõ quy trình nên bị mông lung, lan man nhiều thứ',
+        'Kiến thức trên mạng quá nhiều, mỗi người lại nói 1 kiểu',
       ],
     },
     {
-      number: "02",
-      title: "Làm hoài không ra đơn",
+      number: '02',
+      title: 'Làm hoài không ra đơn',
       points: [
-        "Tạo shop nhưng 1-2 tháng rồi mãi vẫn chưa bán được hàng",
-        "Có đăng sản phẩm nhưng không tối ưu SEO để tăng traffic",
-        "Chạy quảng cáo nhưng đa số là lỗ hoặc chi phí gấp 3 doanh thu",
+        'Tạo shop nhưng 1-2 tháng rồi mãi vẫn chưa bán được hàng',
+        'Có đăng sản phẩm nhưng không tối ưu SEO để tăng traffic',
+        'Chạy quảng cáo nhưng đa số là lỗ hoặc chi phí gấp 3 doanh thu',
         'Phụ thuộc vào kỹ thuật "buff đơn" quá nhiều',
       ],
     },
     {
-      number: "03",
-      title: "Ra đơn nhưng còn ít",
+      number: '03',
+      title: 'Ra đơn nhưng còn ít',
       points: [
-        "Chưa biết cách seeding lượt bán và đánh giá 5 sao cho sản phẩm",
-        "Chưa biết cách chọn sản phẩm có lượng đơn đột phá",
-        "Chưa biết cách tối ưu Shop và sản phẩm chuẩn SEO",
-        "Chưa biết cách chạy quảng cáo Shopee 1 vốn 10 lời",
+        'Chưa biết cách seeding lượt bán và đánh giá 5 sao cho sản phẩm',
+        'Chưa biết cách chọn sản phẩm có lượng đơn đột phá',
+        'Chưa biết cách tối ưu Shop và sản phẩm chuẩn SEO',
+        'Chưa biết cách chạy quảng cáo Shopee 1 vốn 10 lời',
       ],
     },
   ];
 
   const pricingPlans = [
     {
-      name: "khóa ShopeeZoom",
-      originalPrice: "8.000.000 VNĐ",
-      currentPrice: "3990K",
+      name: 'khóa ShopeeZoom',
+      originalPrice: '8.000.000 VNĐ',
+      currentPrice: '3990K',
       features: [
-        "Khóa học bán hàng Shopee từ A-Z",
-        "Khóa học cập nhật hàng tháng",
-        "Plan kế hoạch phát triển Shop",
-        "Tài liệu quảng cáo Shopee",
-        "Tài khoản Canva Pro trọn đời",
-        "Frame khung ảnh Shopee",
-        "Thiết kế gian hàng trị giá 1tr9",
-        "eBook Shopee 100 đơn",
+        'Khóa học bán hàng Shopee từ A-Z',
+        'Khóa học cập nhật hàng tháng',
+        'Plan kế hoạch phát triển Shop',
+        'Tài liệu quảng cáo Shopee',
+        'Tài khoản Canva Pro trọn đời',
+        'Frame khung ảnh Shopee',
+        'Thiết kế gian hàng trị giá 1tr9',
+        'eBook Shopee 100 đơn',
       ],
       isPopular: true,
     },
     {
-      name: "khóa TikTok Shopee",
-      originalPrice: "17.000.000 VNĐ",
-      currentPrice: "8950K",
+      name: 'khóa TikTok Shopee',
+      originalPrice: '17.000.000 VNĐ',
+      currentPrice: '8950K',
       features: [
-        "Khóa học bán hàng TikTok Shop từ A-Z",
-        "Khóa học bán hàng Shopee từ A-Z",
-        "Khóa học cập nhật hàng tháng",
-        "Plan kế hoạch phát triển Shop",
-        "Tài liệu quảng cáo TikTok & Shopee",
-        "Tài khoản Canva Pro trọn đời",
-        "Frame khung ảnh TikTok & Shopee",
-        "Thiết kế gian hàng trị giá 3tr",
-        "Hướng dẫn livestream bán hàng",
+        'Khóa học bán hàng TikTok Shop từ A-Z',
+        'Khóa học bán hàng Shopee từ A-Z',
+        'Khóa học cập nhật hàng tháng',
+        'Plan kế hoạch phát triển Shop',
+        'Tài liệu quảng cáo TikTok & Shopee',
+        'Tài khoản Canva Pro trọn đời',
+        'Frame khung ảnh TikTok & Shopee',
+        'Thiết kế gian hàng trị giá 3tr',
+        'Hướng dẫn livestream bán hàng',
       ],
       isPopular: false,
-      note: "Khóa học kết hợp 2 nền tảng hot nhất hiện tại",
+      note: 'Khóa học kết hợp 2 nền tảng hot nhất hiện tại',
     },
     {
-      name: "khóa Combo VIP",
-      originalPrice: "25.000.000 VNĐ",
-      currentPrice: "9990K",
+      name: 'khóa Combo VIP',
+      originalPrice: '25.000.000 VNĐ',
+      currentPrice: '9990K',
       features: [
-        "Khóa học bán hàng Shopee từ A-Z",
-        "Khóa học bán hàng TikTok Shop từ A-Z",
-        "Plan kế hoạch phát triển 2 sàn",
-        "Tài liệu quảng cáo 2 sàn",
-        "Tài khoản Canva Pro trọn đời",
-        "Frame khung ảnh 2 sàn",
-        "eBook Shopee 100 đơn",
-        "Thiết kế gian hàng trị giá 5 triệu",
-        "Hướng dẫn livestream bán hàng",
-        "Mentorship 1-1 riêng trong 6 tháng",
+        'Khóa học bán hàng Shopee từ A-Z',
+        'Khóa học bán hàng TikTok Shop từ A-Z',
+        'Plan kế hoạch phát triển 2 sàn',
+        'Tài liệu quảng cáo 2 sàn',
+        'Tài khoản Canva Pro trọn đời',
+        'Frame khung ảnh 2 sàn',
+        'eBook Shopee 100 đơn',
+        'Thiết kế gian hàng trị giá 5 triệu',
+        'Hướng dẫn livestream bán hàng',
+        'Mentorship 1-1 riêng trong 6 tháng',
       ],
       isPopular: false,
     },
@@ -969,7 +977,7 @@ export default function ShopeeZoomLanding() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
             <div className="flex items-center justify-between">
               <button
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="text-xl font-bold hover:text-primary transition-colors cursor-pointer"
                 data-testid="nav-scroll-top"
               >
@@ -977,49 +985,49 @@ export default function ShopeeZoomLanding() {
               </button>
               <div className="hidden md:flex space-x-6">
                 <button
-                  onClick={() => scrollToSection("quatang")}
+                  onClick={() => scrollToSection('quatang')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-quatang"
                 >
                   QUÀ TẶNG
                 </button>
                 <button
-                  onClick={() => scrollToSection("vande")}
+                  onClick={() => scrollToSection('vande')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-vande"
                 >
                   VẤN ĐỀ
                 </button>
                 <button
-                  onClick={() => scrollToSection("chuongtrinh")}
+                  onClick={() => scrollToSection('chuongtrinh')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-chuongtrinh"
                 >
                   CHƯƠNG TRÌNH
                 </button>
                 <button
-                  onClick={() => scrollToSection("phuhop")}
+                  onClick={() => scrollToSection('phuhop')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-phuhop"
                 >
                   PHÙ HỢP
                 </button>
                 <button
-                  onClick={() => scrollToSection("kynang")}
+                  onClick={() => scrollToSection('kynang')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-kynang"
                 >
                   KỸ NĂNG
                 </button>
                 <button
-                  onClick={() => scrollToSection("ketqua")}
+                  onClick={() => scrollToSection('ketqua')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-ketqua"
                 >
                   KẾT QUẢ
                 </button>
                 <button
-                  onClick={() => scrollToSection("feedback")}
+                  onClick={() => scrollToSection('feedback')}
                   className="hover:text-primary transition-colors"
                   data-testid="nav-feedback"
                 >
@@ -1028,7 +1036,7 @@ export default function ShopeeZoomLanding() {
               </div>
               <Button
                 className="text-white"
-                onClick={() => scrollToSection("dangky")}
+                onClick={() => scrollToSection('dangky')}
                 data-testid="nav-register"
               >
                 Đăng ký ngay →
@@ -1047,15 +1055,15 @@ export default function ShopeeZoomLanding() {
               Giúp bạn xây dựng và phát triển Shop mang về 3000 đơn mỗi tháng
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-foreground mb-8">
-              Đã có{" "}
+              Đã có{' '}
               <span className="font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent">
                 932 bạn tham gia
-              </span>{" "}
-              vào học và xây dựng được cho mình{" "}
+              </span>{' '}
+              vào học và xây dựng được cho mình{' '}
               <span className="font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent">
                 1 - 3 Shop
-              </span>{" "}
-              mang lại đơn hàng đều đặn, ổn định{" "}
+              </span>{' '}
+              mang lại đơn hàng đều đặn, ổn định{' '}
               <span className="font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent">
                 sau 2 tháng học và thực hành
               </span>
@@ -1079,16 +1087,16 @@ export default function ShopeeZoomLanding() {
               <Card
                 className="max-w-lg mx-auto mb-6"
                 style={{
-                  background: "linear-gradient(to right, #ffffff, #fdf2f8)",
-                  border: "1px solid #f9a8d4",
+                  background: 'linear-gradient(to right, #ffffff, #fdf2f8)',
+                  border: '1px solid #f9a8d4',
                 }}
               >
                 <CardContent className="p-6">
                   <div
                     className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center"
                     style={{
-                      background: "inherit",
-                      border: "inherit",
+                      background: 'inherit',
+                      border: 'inherit',
                     }}
                   >
                     <div>
@@ -1257,7 +1265,7 @@ export default function ShopeeZoomLanding() {
             <Button
               size="lg"
               className="text-lg px-6 sm:px-8 py-3 sm:py-4 animate-pulse text-white"
-              onClick={() => handleRegistration("khóa ShopeeZoom", "3990K")}
+              onClick={() => handleRegistration('khóa ShopeeZoom', '3990K')}
               data-testid="hero-register"
             >
               Đăng ký bây giờ
@@ -1395,15 +1403,15 @@ export default function ShopeeZoomLanding() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {[
-                  "Kỹ năng nghiên cứu thị trường trước khi quyết định bán hàng",
-                  "Nắm được kỹ năng marketing nội sàn hiệu quả",
-                  "Kỹ thuật tăng x5 lần số đánh giá trong shop",
-                  "Xây dựng hệ thống kinh doanh vận hành 1 người",
-                  "Kỹ năng booking KOC trên Tiktok, Instagram",
-                  "Kỹ năng kéo traffic ngoài sàn vào shop",
-                  "Tư duy về kinh doanh online trên sàn TMĐT",
-                  "Kỹ năng tự tạo các luồng traffic tự nhiên",
-                  "Hình ảnh chuẩn cấu trúc SEO trên sàn Shopee",
+                  'Kỹ năng nghiên cứu thị trường trước khi quyết định bán hàng',
+                  'Nắm được kỹ năng marketing nội sàn hiệu quả',
+                  'Kỹ thuật tăng x5 lần số đánh giá trong shop',
+                  'Xây dựng hệ thống kinh doanh vận hành 1 người',
+                  'Kỹ năng booking KOC trên Tiktok, Instagram',
+                  'Kỹ năng kéo traffic ngoài sàn vào shop',
+                  'Tư duy về kinh doanh online trên sàn TMĐT',
+                  'Kỹ năng tự tạo các luồng traffic tự nhiên',
+                  'Hình ảnh chuẩn cấu trúc SEO trên sàn Shopee',
                 ].map((benefit, index) => (
                   <div
                     key={index}
@@ -1430,7 +1438,7 @@ export default function ShopeeZoomLanding() {
                     size="lg"
                     variant="secondary"
                     className="bg-white text-primary hover:bg-gray-100 "
-                    onClick={() => scrollToSection("dangky")}
+                    onClick={() => scrollToSection('dangky')}
                     data-testid="skills-cta"
                   >
                     Học ngay những kỹ năng này
@@ -1585,7 +1593,7 @@ export default function ShopeeZoomLanding() {
                     size="lg"
                     variant="secondary"
                     className="bg-white text-primary hover:bg-gray-100 "
-                    onClick={() => scrollToSection("dangky")}
+                    onClick={() => scrollToSection('dangky')}
                     data-testid="target-audience-cta"
                   >
                     Bắt đầu hành trình của bạn
@@ -1605,25 +1613,25 @@ export default function ShopeeZoomLanding() {
                   Bạn có thể kiếm được bao nhiêu đơn?
                 </h3>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Tất cả những gì Hiếu dạy trong khóa này là{" "}
+                  Tất cả những gì Hiếu dạy trong khóa này là{' '}
                   <span className="font-bold text-primary">
                     kinh nghiệm 8 năm thực chiến
-                  </span>{" "}
+                  </span>{' '}
                   kinh doanh trên Shopee
                 </p>
                 <div className="bg-card rounded-lg p-6 max-w-4xl mx-auto px-4 sm:px-0">
                   <p className="text-base leading-relaxed">
-                    Hiếu đã{" "}
+                    Hiếu đã{' '}
                     <span className="font-bold text-primary">tốn 8 năm</span> để
                     tự học, tự làm, tự sửa sai, mất nhiều thời gian, mất nhiều
-                    tiền "ngu" và mới được thành quả này. Bạn{" "}
+                    tiền "ngu" và mới được thành quả này. Bạn{' '}
                     <span className="font-bold text-primary">
                       không cần phải bỏ ra 8 năm
-                    </span>{" "}
+                    </span>{' '}
                     để tự mày mò tìm hiểu, bạn chỉ cần học toàn bộ kiến thức này
-                    trong{" "}
-                    <span className="font-bold text-primary">7 buổi học</span>{" "}
-                    và được{" "}
+                    trong{' '}
+                    <span className="font-bold text-primary">7 buổi học</span>{' '}
+                    và được{' '}
                     <span className="font-bold text-primary">
                       Hiếu hỗ trợ trực tiếp 1-1 trọn đời.
                     </span>
@@ -1806,7 +1814,7 @@ export default function ShopeeZoomLanding() {
                                 onClick={() =>
                                   window.open(
                                     `https://${feedback.shopeeLink}`,
-                                    "_blank",
+                                    '_blank'
                                   )
                                 }
                                 className="inline-flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-full text-sm transition-all duration-200"
@@ -1851,7 +1859,7 @@ export default function ShopeeZoomLanding() {
                     size="lg"
                     variant="secondary"
                     className="bg-white text-primary hover:bg-gray-100"
-                    onClick={() => scrollToSection("dangky")}
+                    onClick={() => scrollToSection('dangky')}
                     data-testid="success-cta"
                   >
                     Bắt đầu câu chuyện của bạn
@@ -1871,8 +1879,8 @@ export default function ShopeeZoomLanding() {
                 Quà tặng đặc biệt khi đăng ký hôm nay
               </h2>
               <p className="text-xl text-muted-foreground mb-4">
-                Trị giá hơn{" "}
-                <span className="font-bold text-primary">6.390.000 VNĐ</span>{" "}
+                Trị giá hơn{' '}
+                <span className="font-bold text-primary">6.390.000 VNĐ</span>{' '}
                 hoàn toàn miễn phí
               </p>
               <Badge className="text-sm px-4 py-2 bg-primary text-white border-primary">
@@ -1909,16 +1917,16 @@ export default function ShopeeZoomLanding() {
                     Tổng giá trị quà tặng: 6.390.000 VNĐ
                   </h3>
                   <p className="text-lg mb-6 text-muted-foreground">
-                    Bạn chỉ cần thanh toán{" "}
+                    Bạn chỉ cần thanh toán{' '}
                     <span className="font-bold text-foreground">
                       3.990.000 VNĐ
-                    </span>{" "}
+                    </span>{' '}
                     và nhận toàn bộ!
                   </p>
                   <Button
                     size="lg"
                     className="bg-primary hover:bg-primary/90 text-white px-8"
-                    onClick={() => scrollToSection("dangky")}
+                    onClick={() => scrollToSection('dangky')}
                     data-testid="claim-gifts-btn"
                   >
                     Nhận ngay quà tặng
@@ -2039,7 +2047,9 @@ export default function ShopeeZoomLanding() {
               {pricingPlans.map((plan, index) => (
                 <Card
                   key={index}
-                  className={`relative ${plan.isPopular ? "border-primary shadow-lg scale-105" : ""}`}
+                  className={`relative ${
+                    plan.isPopular ? 'border-primary shadow-lg scale-105' : ''
+                  }`}
                 >
                   {plan.isPopular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -2215,7 +2225,7 @@ export default function ShopeeZoomLanding() {
               <Button
                 size="lg"
                 className="text-lg px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 hover:bg-gray-100 font-bold shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={() => handleRegistration("khóa ShopeeZoom", "3990K")}
+                onClick={() => handleRegistration('khóa ShopeeZoom', '3990K')}
                 data-testid="final-cta"
               >
                 Đăng ký khóa học ngay
@@ -2225,7 +2235,7 @@ export default function ShopeeZoomLanding() {
                 size="lg"
                 variant="outline"
                 className="text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={() => scrollToSection("thanhtoan")}
+                onClick={() => scrollToSection('thanhtoan')}
                 data-testid="payment-info-cta"
               >
                 Xem thông tin thanh toán
@@ -2317,7 +2327,7 @@ export default function ShopeeZoomLanding() {
                       variant="outline"
                       className="text-white bg-sky-500 border-sky-500 hover:bg-sky-600"
                       onClick={() =>
-                        window.open("https://zalo.me/0931459459", "_blank")
+                        window.open('https://zalo.me/0931459459', '_blank')
                       }
                       data-testid="contact-zalo"
                     >
@@ -2327,7 +2337,7 @@ export default function ShopeeZoomLanding() {
                     <Button
                       className="bg-primary hover:bg-primary/90 text-white"
                       onClick={() =>
-                        handleRegistration("khóa ShopeeZoom", "3990K")
+                        handleRegistration('khóa ShopeeZoom', '3990K')
                       }
                       data-testid="early-registration"
                     >
@@ -2346,7 +2356,7 @@ export default function ShopeeZoomLanding() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center text-muted-foreground">
             <div
               className="mb-6 max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed"
-              style={{ fontSize: "12px" }}
+              style={{ fontSize: '12px' }}
             >
               <p>
                 <strong>LƯU Ý:</strong> Hiếu không cổ vũ hay hỗ trợ bất kỳ hình
