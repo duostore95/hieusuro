@@ -426,15 +426,15 @@ export default function NguoiMoiPage() {
                       💡 Đã hiểu nền tảng rồi!
                     </h3>
                     <p className="text-gray-600 mb-6">
-                      Khóa học này dạy miễn phí! Muốn có kịch bản chi tiết hơn, template có sẵn, và hỗ trợ 1-1? Mình có khóa nâng cao phù hợp với bạn.
+                      Lộ trình này miễn phí! Bạn có thể học và tham khảo thêm ở nhóm trên Facebook hen! Nếu bạn muốn học lớp Affiliate Shopee VIP, có động đồng học viên, có sự support từ Hiếu. Chi tiết bạn bấm vào bên dưới nghen!
                     </p>
-                    <Link href="/affshopee">
+                    <Link href="https://zalo.me/hieusuro">
                       <Button 
                         size="lg" 
                         className="bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 text-white"
                         data-testid="button-affiliate-course"
                       >
-                        Tìm hiểu khóa Affiliate Shopee 101
+                        Tìm hiểu khóa Affiliate Shopee VIP
                         <ChevronRight className="ml-2 h-5 w-5" />
                       </Button>
                     </Link>
