@@ -1,19 +1,25 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { Eye, EyeOff, Lock, User } from "lucide-react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 
 interface LoginProps {
-  onLogin: (username: string, password: string) => Promise<boolean>;
+  onLogin: (email: string, password: string) => Promise<boolean>;
 }
 
 export default function Login({ onLogin }: LoginProps) {
   const [formData, setFormData] = useState({
-    username: "",
-    password: ""
+    email: '',
+    password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,24 +30,24 @@ export default function Login({ onLogin }: LoginProps) {
     setIsLoading(true);
 
     try {
-      const success = await onLogin(formData.username, formData.password);
+      const success = await onLogin(formData.email, formData.password);
       if (success) {
         toast({
-          title: "Đăng nhập thành công!",
-          description: "Chào mừng bạn quay lại.",
+          title: 'Đăng nhập thành công!',
+          description: 'Chào mừng bạn quay lại.',
         });
       } else {
         toast({
-          title: "Đăng nhập thất bại",
-          description: "Tên đăng nhập hoặc mật khẩu không đúng.",
-          variant: "destructive",
+          title: 'Đăng nhập thất bại',
+          description: 'Email hoặc mật khẩu không đúng.',
+          variant: 'destructive',
         });
       }
     } catch (error) {
       toast({
-        title: "Lỗi",
-        description: "Có lỗi xảy ra trong quá trình đăng nhập.",
-        variant: "destructive",
+        title: 'Lỗi',
+        description: 'Có lỗi xảy ra trong quá trình đăng nhập.',
+        variant: 'destructive',
       });
     } finally {
       setIsLoading(false);
@@ -57,7 +63,9 @@ export default function Login({ onLogin }: LoginProps) {
               <span className="text-xl font-bold text-primary">H</span>
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold text-center">Hiếu Suro</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Hiếu Suro
+          </CardTitle>
           <CardDescription className="text-center">
             Admin Dashboard
           </CardDescription>
@@ -65,18 +73,20 @@ export default function Login({ onLogin }: LoginProps) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username">Tên đăng nhập</Label>
+              <Label htmlFor="email">Email</Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
-                  id="username"
-                  type="text"
-                  placeholder="Nhập tên đăng nhập"
-                  value={formData.username}
-                  onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                  id="email"
+                  type="email"
+                  placeholder="Nhập địa chỉ email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, email: e.target.value }))
+                  }
                   className="pl-10"
                   required
-                  data-testid="input-username"
+                  data-testid="input-email"
                 />
               </div>
             </div>
@@ -86,10 +96,15 @@ export default function Login({ onLogin }: LoginProps) {
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Nhập mật khẩu"
                   value={formData.password}
-                  onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      password: e.target.value,
+                    }))
+                  }
                   className="pl-10 pr-10"
                   required
                   data-testid="input-password"
@@ -100,17 +115,21 @@ export default function Login({ onLogin }: LoginProps) {
                   className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
                   data-testid="toggle-password-visibility"
                 >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
                 </button>
               </div>
             </div>
-            <Button 
-              type="submit" 
-              className="w-full" 
+            <Button
+              type="submit"
+              className="w-full"
               disabled={isLoading}
               data-testid="button-login"
             >
-              {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
+              {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
             </Button>
           </form>
         </CardContent>

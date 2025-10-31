@@ -1,6 +1,6 @@
 import {
   type User,
-  type InsertUser,
+  // type InsertUser,
   type BlogPost,
   type InsertBlogPost,
   type Course,
@@ -13,7 +13,7 @@ import {
   type InsertSetting,
   type LandingPageView,
   type InsertLandingPageView,
-  users,
+  user as users,
   blogPosts,
   courses,
   testimonials,
@@ -27,9 +27,9 @@ import { eq, desc, and, sql, notInArray } from 'drizzle-orm';
 
 export interface IStorage {
   // Users
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // getUser(id: string): Promise<User | undefined>;
+  // getUserByUsername(username: string): Promise<User | undefined>;
+  // createUser(user: InsertUser): Promise<User>;
 
   // Blog Posts
   getAllBlogPosts(): Promise<BlogPost[]>;
@@ -89,28 +89,28 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   // Users
-  async getUser(id: string): Promise<User | undefined> {
-    const result = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, id))
-      .limit(1);
-    return result[0];
-  }
+  // async getUser(id: string): Promise<User | undefined> {
+  //   const result = await db
+  //     .select()
+  //     .from(users)
+  //     .where(eq(users.id, id))
+  //     .limit(1);
+  //   return result[0];
+  // }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const result = await db
-      .select()
-      .from(users)
-      .where(eq(users.username, username))
-      .limit(1);
-    return result[0];
-  }
+  // async getUserByUsername(username: string): Promise<User | undefined> {
+  //   const result = await db
+  //     .select()
+  //     .from(users)
+  //     .where(eq(users.username, username))
+  //     .limit(1);
+  //   return result[0];
+  // }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const result = await db.insert(users).values(insertUser).returning();
-    return result[0];
-  }
+  // async createUser(insertUser: InsertUser): Promise<User> {
+  //   const result = await db.insert(users).values(insertUser).returning();
+  //   return result[0];
+  // }
 
   // Blog Posts
   async getAllBlogPosts(): Promise<BlogPost[]> {

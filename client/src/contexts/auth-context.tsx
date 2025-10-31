@@ -1,12 +1,17 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { setAuthHeadersGetter } from "@/lib/queryClient";
+import { createContext, useContext, useEffect, ReactNode } from 'react';
+import { useSession, signIn, signOut } from '@/lib/auth-client';
+import { setAuthHeadersGetter } from '@/lib/queryClient';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  token: string | null;
-  login: (username: string, password: string) => Promise<boolean>;
-  logout: () => void;
-  changePassword: (oldPassword: string, newPassword: string) => Promise<boolean>;
+  user: {
+    id: string;
+    email: string;
+    name: string;
+  } | null;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<boolean>;
+  logout: () => Promise<void>;
   getAuthHeaders: () => HeadersInit;
 }
 
@@ -15,7 +20,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 }
@@ -25,102 +30,61 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  // Use better-auth session hook
+  const { data: session, isPending: isLoading } = useSession();
 
-  // Check if user is already logged in on app start
-  useEffect(() => {
-    const savedToken = localStorage.getItem("authToken");
-    if (savedToken) {
-      setToken(savedToken);
-      setIsAuthenticated(true);
-    }
-  }, []);
+  const isAuthenticated = !!session?.user;
+  const user = session?.user || null;
 
   // Set up auth headers getter for API requests
   useEffect(() => {
     setAuthHeadersGetter(getAuthHeaders);
-  }, [token]);
+  }, [session]);
 
-  const login = async (username: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      const result = await signIn.email({
+        email,
+        password,
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        const authToken = data.token;
-        setToken(authToken);
-        setIsAuthenticated(true);
-        localStorage.setItem("authToken", authToken);
-        return true;
+      if (result.error) {
+        console.error('Login error:', result.error);
+        return false;
       }
-      return false;
+
+      return true;
     } catch (error) {
-      console.error("Login error:", error);
+      console.error('Login error:', error);
       return false;
     }
   };
 
   const logout = async () => {
     try {
-      // Call logout endpoint if token exists
-      if (token) {
-        await fetch("/api/auth/logout", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-          },
-        });
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-    } finally {
-      setIsAuthenticated(false);
-      setToken(null);
-      localStorage.removeItem("authToken");
+      await signOut();
       // Redirect to homepage after logout
-      window.location.href = "/";
-    }
-  };
-
-  const changePassword = async (oldPassword: string, newPassword: string): Promise<boolean> => {
-    try {
-      const response = await fetch("/api/auth/change-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ oldPassword, newPassword }),
-      });
-
-      return response.ok;
+      window.location.href = '/';
     } catch (error) {
-      console.error("Change password error:", error);
-      return false;
+      console.error('Logout error:', error);
+      // Still redirect even if logout fails
+      window.location.href = '/';
     }
   };
 
   const getAuthHeaders = (): HeadersInit => {
-    const headers: HeadersInit = {};
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
-    }
-    return headers;
+    // Better-auth automatically handles session cookies
+    // No need to manually add authorization headers
+    // But we can still return empty headers for compatibility
+    return {};
   };
 
   const value = {
     isAuthenticated,
-    token,
+    user,
+    isLoading,
     login,
     logout,
-    changePassword,
     getAuthHeaders,
   };
 

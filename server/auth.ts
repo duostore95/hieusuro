@@ -1,71 +1,65 @@
-import { Request, Response, NextFunction } from "express";
-import { randomUUID } from "crypto";
+import { Request, Response, NextFunction } from 'express';
+import { betterAuth } from 'better-auth';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { db } from '@server/db';
 
-// Simple in-memory session store for demo (trong production nên dùng database hoặc Redis)
-const activeSessions = new Set<string>();
-
-// Interface để extend Request với user info
+// Interface to extend Request with user info
 interface AuthenticatedRequest extends Request {
-  sessionId?: string;
-  isAuthenticated?: boolean;
+  user?: {
+    id: string;
+    email: string;
+    name: string;
+  };
+  session?: {
+    id: string;
+    userId: string;
+    expiresAt: Date;
+  };
 }
 
-// Function tạo session ID an toàn
-function generateSessionId(): string {
-  return randomUUID();
-}
+// Configure better-auth with database and settings
+export const auth = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: 'pg',
+  }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  // baseURL: process.env.BASE_URL || 'http://localhost:5000',
+  // trustedOrigins: [
+  //   process.env.BASE_URL || 'http://localhost:5000',
+  //   'http://localhost:5000',
+  //   'http://localhost:5173', // Vite dev server
+  // ],
+});
 
-// Middleware kiểm tra authentication
-export function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
-  const authHeader = req.headers.authorization;
-  
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ 
-      error: "Unauthorized", 
-      message: "Vui lòng đăng nhập để thực hiện thao tác này" 
+// Middleware to check authentication using better-auth sessions
+export async function requireAuth(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    // Get session from better-auth using the request
+    const session = await auth.api.getSession({
+      headers: req.headers as any,
+    });
+
+    if (!session || !session.user) {
+      return res.status(401).json({
+        error: 'Unauthorized',
+        message: 'Vui lòng đăng nhập để thực hiện thao tác này',
+      });
+    }
+
+    // Attach user and session to request
+    req.user = session.user;
+    req.session = session.session;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      error: 'Unauthorized',
+      message: 'Phiên đăng nhập không hợp lệ hoặc đã hết hạn',
     });
   }
-
-  const sessionId = authHeader.substring(7); // Remove 'Bearer ' prefix
-  
-  if (!activeSessions.has(sessionId)) {
-    return res.status(401).json({ 
-      error: "Unauthorized", 
-      message: "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại" 
-    });
-  }
-
-  req.sessionId = sessionId;
-  req.isAuthenticated = true;
-  next();
-}
-
-// Function để login và tạo session
-export function createSession(): string {
-  const sessionId = generateSessionId();
-  activeSessions.add(sessionId);
-  
-  // Auto expire session after 24 hours
-  setTimeout(() => {
-    activeSessions.delete(sessionId);
-  }, 24 * 60 * 60 * 1000);
-  
-  return sessionId;
-}
-
-// Function để logout và xóa session
-export function destroySession(sessionId: string): void {
-  activeSessions.delete(sessionId);
-}
-
-// Function để verify login credentials
-export async function verifyCredentials(username: string, password: string): Promise<boolean> {
-  // Import storage here to avoid circular dependency
-  const { storage } = await import("./storage");
-  
-  // Get credentials from storage first, then environment variables or fallback to defaults
-  const adminUsername = process.env.ADMIN_USERNAME || "admin";
-  const adminPassword = await storage.getAdminPassword();
-  
-  return username === adminUsername && password === adminPassword;
 }

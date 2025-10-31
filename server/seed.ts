@@ -1,15 +1,14 @@
-import 'dotenv/config';
-import { db } from './db';
 import {
   blogPosts,
   courses,
-  testimonials,
-  settings,
   landingPageViews,
-  users,
+  settings,
+  testimonials,
 } from '@shared/schema';
+import 'dotenv/config';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import { db } from './db';
 
 async function seed() {
   console.log('🌱 Starting database seed...');
@@ -23,20 +22,20 @@ async function seed() {
     console.log('📖 Loaded data from data.json');
 
     // Seed Users (if any)
-    if (data.users && data.users.length > 0) {
-      console.log(`👤 Seeding ${data.users.length} users...`);
-      for (const [_, user] of data.users) {
-        await db
-          .insert(users)
-          .values({
-            id: user.id,
-            username: user.username,
-            password: user.password,
-          })
-          .onConflictDoNothing();
-      }
-      console.log('✅ Users seeded');
-    }
+    // if (data.users && data.users.length > 0) {
+    //   console.log(`👤 Seeding ${data.users.length} users...`);
+    //   for (const [_, user] of data.users) {
+    //     await db
+    //       .insert(users)
+    //       .values({
+    //         id: user.id,
+    //         username: user.username,
+    //         password: user.password,
+    //       })
+    //       .onConflictDoNothing();
+    //   }
+    //   console.log('✅ Users seeded');
+    // }
 
     // Seed Blog Posts
     if (data.blogPosts && data.blogPosts.length > 0) {

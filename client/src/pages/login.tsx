@@ -1,8 +1,8 @@
-import { useAuth } from "@/contexts/auth-context";
-import { useLocation } from "wouter";
-import { useEffect } from "react";
-import Login from "@/components/auth/login";
-import SEO from "@/components/seo";
+import { useAuth } from '@/contexts/auth-context';
+import { useLocation } from 'wouter';
+import { useEffect } from 'react';
+import Login from '@/components/auth/login';
+import SEO from '@/components/seo';
 
 export default function LoginPage() {
   const { isAuthenticated, login } = useAuth();
@@ -10,21 +10,24 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/admin");
+      navigate('/admin');
     }
   }, [isAuthenticated, navigate]);
 
-  const handleLogin = async (username: string, password: string): Promise<boolean> => {
-    const success = await login(username, password);
+  const handleLogin = async (
+    email: string,
+    password: string
+  ): Promise<boolean> => {
+    const success = await login(email, password);
     if (success) {
-      navigate("/admin");
+      navigate('/admin');
     }
     return success;
   };
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Đăng nhập - Hiếu Suro Admin"
         description="Trang đăng nhập cho quản trị viên website Hiếu Suro"
         keywords="đăng nhập, login, admin, hiếu suro"
