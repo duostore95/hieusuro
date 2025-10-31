@@ -162,7 +162,7 @@ export default function NguoiMoiPage() {
     return (
       <>
         <Helmet>
-          <title>Khóa học cho người mới - Hiếu Suro</title>
+          <title>Học Affiliate Shopee dành cho người mới - Hiếu Suro</title>
           <meta name="description" content="Khóa học miễn phí cho người mới bắt đầu với Shopee Affiliate" />
         </Helmet>
         <Header />
@@ -215,7 +215,7 @@ export default function NguoiMoiPage() {
     return (
       <>
         <Helmet>
-          <title>Khóa học cho người mới - Hiếu Suro</title>
+          <title>Học Affiliate Shopee dành cho người mới - Hiếu Suro</title>
           <meta name="description" content="Khóa học miễn phí cho người mới bắt đầu với Shopee Affiliate" />
         </Helmet>
         <Header />
@@ -244,7 +244,7 @@ export default function NguoiMoiPage() {
   return (
     <>
       <Helmet>
-        <title>Khóa học cho người mới - Hiếu Suro</title>
+        <title>Học Affiliate Shopee dành cho người mới - Hiếu Suro</title>
         <meta name="description" content="Khóa học miễn phí dành cho người mới bắt đầu với Shopee Affiliate. Học từ cơ bản đến nâng cao, hoàn toàn miễn phí!" />
         <meta property="og:title" content="Khóa học cho người mới - Hiếu Suro" />
         <meta property="og:description" content="Khóa học miễn phí dành cho người mới bắt đầu với Shopee Affiliate" />
@@ -458,7 +458,7 @@ export default function NguoiMoiPage() {
                 Bạn đã hoàn thành khóa học miễn phí! Giờ là lúc HÀNH ĐỘNG và kiếm tiền thật!
               </p>
               <p className="text-sm text-gray-500 mb-6">
-                💡 Muốn có mentor hỗ trợ 1-1, kịch bản chi tiết hơn, và roadmap từ 5M → 50M/tháng? Xem khóa nâng cao của mình nhé.
+                💡 Muốn học phương pháp VIP, có cộng đồng học viên cùng nhau làm, và lộ trình từ 5M → 50M/tháng? Xem khóa VIP của Hiếu nhé.
               </p>
               <div className="space-y-3">
                 <Link href="/affshopee">
