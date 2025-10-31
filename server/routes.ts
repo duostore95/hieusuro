@@ -409,7 +409,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const landingPageView = await storage.incrementLandingPageViewBySlug(slug);
-      res.json({ views: landingPageView.views });
+      res.json({ views: landingPageView?.views || 0 });
     } catch (error) {
       res.status(500).json({ error: "Failed to increment views" });
     }
